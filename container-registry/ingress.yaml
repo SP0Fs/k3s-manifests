@@ -5,6 +5,7 @@ metadata:
   namespace: registry
   annotations:
     cert-manager.io/cluster-issuer: ca-issuer
+    # for large images
     nginx.ingress.kubernetes.io/proxy-body-size: 50m
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS    
     nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
