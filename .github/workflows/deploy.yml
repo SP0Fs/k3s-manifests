@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - "**.md"
+      - ".github/*"
 
   workflow_dispatch:
 
@@ -19,4 +22,14 @@ jobs:
         run: |
           mkdir ${HOME}/.kube
           echo ${{ secrets.KUBECONFIG }} | base64 --decode > ${HOME}/.kube/config
-          cat ${HOME}/.kube/config
+          
+      - name: Get changed files
+        uses: tj-actions/changed-files@v25
+        id: changed-files
+
+      - name: Apply all changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "applying $file"
+            kubectl apply -f $file
+          done
