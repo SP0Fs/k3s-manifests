@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry
+  namespace: registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: registry
+  template:
+    metadata:
+      labels:
+        app: registry
+    spec:
+      containers:
+      - name: registry
+        image: registry:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: REGISTRY_HTTP_TLS_CERTIFICATE
+          value: /certs/tls.crt
+        - name: REGISTRY_HTTP_TLS_KEY
+          value: /certs/tls.key
+        volumeMounts:
+        - mountPath: "/var/lib/registry"
+          name: registry-pv
+          subPath: "registry"
+        - mountPath: "/certs"
+          name: certs
+      volumes:
+      - name: registry-pv
+        persistentVolumeClaim:
+          claimName: registry-pvc
+      - name: certs
+        secret:
+          secretName: registry-certs
