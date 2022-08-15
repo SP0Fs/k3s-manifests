@@ -6,7 +6,7 @@ on:
       - master
     paths-ignore:
       - "**.md"
-      - ".github/*"
+      # - ".github/*"
 
   workflow_dispatch:
 
@@ -17,6 +17,8 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Create kubeconfig
         run: |
