@@ -48,6 +48,11 @@ rules:
   - delete
   - get
   - patch
+  - create
+  - update
+  - list
+  - watch
+  
 
 ---
 
