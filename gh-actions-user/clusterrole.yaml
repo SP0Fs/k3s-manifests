@@ -42,6 +42,11 @@ rules:
   - ingressclasses
   - validatingwebhookconfiguration
   - mutatingwebhookconfiguration
+  - events
+  - endpoints
+  - podsecuritypolicies
+  - podsecuritypolicyreviews
+  - nodes
 
   verbs:
   - apply
@@ -52,7 +57,7 @@ rules:
   - update
   - list
   - watch
-  
+
 
 ---
 
@@ -69,5 +74,3 @@ subjects:
 - kind: ServiceAccount
   name: gh-actions-user
   namespace: gh-actions
-  
-#yeetlmao
