@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  apply:
+  kubectl-apply:
     runs-on: ubuntu-latest
     steps:
 
