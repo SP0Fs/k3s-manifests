@@ -34,13 +34,13 @@ jobs:
         with:
           timeout_seconds: 30
           max_attempts: 4
-        run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            if [[ "$file" == ".github/"* ]]; then
-              continue
-            fi
-            if [[ "$file" == *".yaml" ]]; then              
-              echo "applying $file"
-              kubectl apply -f $file
-            fi
-          done
+          command: |
+            for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+              if [[ "$file" == ".github/"* ]]; then
+                continue
+              fi
+              if [[ "$file" == *".yaml" ]]; then              
+                echo "applying $file"
+                kubectl apply -f $file
+              fi
+            done
