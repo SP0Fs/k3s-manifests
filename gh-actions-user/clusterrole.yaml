@@ -42,7 +42,9 @@ rules:
   - networkpolicies
   - ingressclasses
   - validatingwebhookconfiguration
+  - validatingwebhookconfigurations
   - mutatingwebhookconfiguration
+  - mutatingwebhookconfigurations
   - events
   - endpoints
   - podsecuritypolicies
