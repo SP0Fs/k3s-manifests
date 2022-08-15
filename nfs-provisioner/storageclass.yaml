@@ -3,8 +3,8 @@ kind: StorageClass
 metadata:
   name: nfs
   labels:
-    app: nfs-subdir-external-provisioner
-provisioner: cluster.local/nfs-subdir-external-provisioner
+    app: nfs-provisioner
+provisioner: cluster.local/nfs-provisioner
 allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate

@@ -2,11 +2,11 @@ kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   labels:
-    chart: nfs-subdir-external-provisioner-4.0.17
+    chart: nfs-provisioner-4.0.17
     heritage: Helm
-    app: nfs-subdir-external-provisioner
-    release: nfs-subdir-external-provisioner
-  name: nfs-subdir-external-provisioner-runner
+    app: nfs-provisioner
+    release: nfs-provisioner
+  name: nfs-provisioner-runner
 rules:
   - apiGroups: [""]
     resources: ["nodes"]
@@ -28,13 +28,13 @@ kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   labels:
-    app: nfs-subdir-external-provisioner
-  name: run-nfs-subdir-external-provisioner
+    app: nfs-provisioner
+  name: run-nfs-provisioner
 subjects:
   - kind: ServiceAccount
-    name: nfs-subdir-external-provisioner
+    name: nfs-provisioner
     namespace: default
 roleRef:
   kind: ClusterRole
-  name: nfs-subdir-external-provisioner-runner
+  name: nfs-provisioner-runner
   apiGroup: rbac.authorization.k8s.io
