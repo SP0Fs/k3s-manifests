@@ -39,11 +39,15 @@ rules:
   - storageclasses
   - customresourcedefinition
   - networkpolicies
+  - ingressclasses
+  - validatingwebhookconfiguration
+  - mutatingwebhookconfiguration
 
   verbs:
   - apply
   - delete
   - get
+  - patch
 
 ---
 
