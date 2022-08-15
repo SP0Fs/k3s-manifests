@@ -30,6 +30,10 @@ jobs:
         id: changed-files
 
       - name: Apply all changed files
+        uses: nick-fields/retry@v2
+        with:
+          timeout_seconds: 30
+          max_attempts: 4
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             if [[ "$file" == ".github/"* ]]; then
