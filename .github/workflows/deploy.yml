@@ -32,6 +32,9 @@ jobs:
       - name: Apply all changed files
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ "$file" == ".github/"* ]]; then
+              continue
+            fi
             echo "applying $file"
             kubectl apply -f $file
           done
