@@ -28,6 +28,21 @@ jobs:
       with:
         files: ${{ steps.changed-files.outputs.all_changed_files }}
       
-    - name: Output
-      run: |
-        echo "${{ steps.validate-files.outputs.all }}"
+    - name: Update Pull Request
+      uses: actions/github-script@v5
+      env:
+        OUTPUT: "${{ steps.validate-files.outputs.all }}"
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const output = `#### Validation Results
+          \`\`\`\n
+          ${process.env.OUTPUT}
+          \`\`\`
+          *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+          })
