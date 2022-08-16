@@ -19,7 +19,6 @@ jobs:
       id: changed-files
       with:
         files_separator: ","
-        dir_names: true
       
     - name: Validate Files
       id: validate-files
@@ -46,3 +45,7 @@ jobs:
             repo: context.repo.repo,
             body: output
           })
+
+    - name: Kubeval Status
+      if: steps.validate-files.outcome == 'failure'
+      run: exit 1
