@@ -15,7 +15,6 @@ spec:
     spec:
       containers:
       - name: registry
-        image: registry:latest
         ports:
         - containerPort: 5000
         env:
