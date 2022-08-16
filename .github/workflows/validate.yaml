@@ -1,0 +1,18 @@
+name: Validate
+
+on:
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+      name: Checkout repository
+    - name: Validate Files
+      id: validate-files
+      uses: instrumenta/kubeval-action@master
+    - name: Output
+      run: echo "${{ steps.validate-files.outputs }}"
