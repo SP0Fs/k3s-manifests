@@ -11,8 +11,11 @@ jobs:
     steps:
     - uses: actions/checkout@master
       name: Checkout repository
+      
     - name: Validate Files
       id: validate-files
       uses: instrumenta/kubeval-action@master
+      continue-on-error: true
+      
     - name: Output
       run: echo "${{ steps.validate-files.outputs }}"
