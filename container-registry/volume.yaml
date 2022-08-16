@@ -1,21 +1,4 @@
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: registry-pv
-  namespace: registry
-  labels:
-    type: local
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/mnt/registry"
-
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: registry-pvc
@@ -23,9 +6,9 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: manual
+  storageClassName: nfs
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
