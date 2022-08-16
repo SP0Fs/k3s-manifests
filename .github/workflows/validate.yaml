@@ -23,11 +23,11 @@ jobs:
       
     - name: Validate Files
       id: validate-files
-      uses: instrumenta/kubeval-action@master
+      uses: marcleibold/kubeval-action@master
       continue-on-error: true
       with:
         files: ${{ steps.changed-files.outputs.all_changed_files }}
       
     - name: Output
       run: |
-        echo "${{ steps.validate-files.outputs }}"
+        echo "${{ steps.validate-files.outputs.all }}"
