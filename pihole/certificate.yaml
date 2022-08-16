@@ -7,11 +7,11 @@ metadata:
     app: pihole
 spec:
   secretName: pihole-certs
-  commonName: pihole.spof.tech
+  commonName: pi-hole.spof.tech
   dnsNames:
-  - pihole.spof.tech
+  - pi-hole.spof.tech
   issuerRef:
-    name: ca-issuer
+    name: ca-issuer-stg
     kind: ClusterIssuer  
   additionalOutputFormats:
   - type: CombinedPEM

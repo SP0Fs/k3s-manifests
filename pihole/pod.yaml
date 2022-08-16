@@ -14,9 +14,22 @@ spec:
     - name: pihole
       image: pihole/pihole:2021.09
       imagePullPolicy: IfNotPresent
-      envFrom:
-        - secretRef:
-            name: pihole-secret
+      env:
+        - name: WEBPASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: pihole-conf
+              key: WEBPASSWORD
+        - name: TZ
+          valueFrom:
+            configMapKeyRef:
+              name: pihole-conf
+              key: TZ
+        # - name: EXTERNALCONF
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: pihole-ssl-conf
+        #       key: EXTERNALCONF
       securityContext:
         privileged: true
       ports:
@@ -35,8 +48,8 @@ spec:
           mountPath: /etc/pihole
         - name: dnsmasq
           mountPath: /etc/dnsmasq.d
-        - name: pihole-ssl-conf
-          mountPath: /etc/lighttpd
+        # - name: pihole-ssl-conf
+        #   mountPath: /etc/lighttpd/external
         - name: pihole-certs
           mountPath: /etc/lighttpd/certs
       resources:
@@ -55,9 +68,9 @@ spec:
       hostPath:
         path: /mnt/pihole/dnsmasq.d
         type: Directory
-    - name: pihole-ssl-conf
-      configMap:
-        name: pihole-ssl-conf
+    # - name: pihole-ssl-conf
+    #   configMap:
+    #     name: pihole-ssl-conf
     - name: pihole-certs
       secret:
         secretName: pihole-certs
