@@ -18,12 +18,66 @@ spec:
       containers:
       - name: owncloud
         image: owncloud/server:latest
+        env:
+          - name: TZ
+            value: Europe/Berlin
+          - name: DEBUG
+            value: "false"
+
+          - name: OWNCLOUD_URL
+          value: https://cloud.spof.tech
+
+          - name: OWNCLOUD_ADMIN_USER
+            value: admin
+          - name: OWNCLOUD_ADMIN_PASSWORD
+            value: passwort   # marc ändert das
+
+          - name: OWNCLOUD_UPLOAD_MAX_FILESIZE
+            value: 4G
+          - name: OWNCLOUD_MAX_FILE_UPLOADS
+            value: "20"
+
+          - name: DB_TYPE
+            value: pgsql
+          - name: DB_HOST
+            value: postgresql
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_USER
+            value: owncloud
+          - name: DB_PASS
+            value: password     # marc ändert das
+          - name: DB_NAME
+            value: owncloud_db
+
         ports:
         - containerPort: 8080
         volumeMounts:
         - mountPath: "/mnt/data"
           name: data
+
+
+      - name: postgresql
+        image: sameersbn/postgresql:9.6-4
+        env:
+          - name: DB_USER
+            value: owncloud
+          - name: DB_PASS
+            value: password
+          - name: DB_NAME
+            value: owncloud_db
+        ports:
+          - containerPort: 5432
+            protocol: TCP
+        volumeMounts:
+          - mountPath: /var/lib/postgresql
+            name: owncloud-db
+
+
       volumes:
       - name: data
         persistentVolumeClaim:
           claimName: owncloud-pvc
+      - name: owncloud-db
+        persistentVolumeClaim:
+          claimName: owncloud-db-pvc
