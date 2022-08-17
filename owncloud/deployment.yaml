@@ -30,7 +30,7 @@ spec:
           - name: OWNCLOUD_ADMIN_USER
             value: admin
           - name: OWNCLOUD_ADMIN_PASSWORD
-            value: ${OWNCLOUD_ADMIN_PASS}   # marc ändert das
+            value: ${OWNCLOUD_ADMIN_PASS} 
 
           - name: OWNCLOUD_UPLOAD_MAX_FILESIZE
             value: 10G
@@ -46,7 +46,7 @@ spec:
           - name: DB_USER
             value: owncloud
           - name: DB_PASS
-            value: ${OWNCLOUD_DB_PASS}     # marc ändert das
+            value: ${OWNCLOUD_DB_PASS} 
           - name: DB_NAME
             value: owncloud_db
 
