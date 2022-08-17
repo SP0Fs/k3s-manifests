@@ -19,21 +19,38 @@ spec:
     spec:
       serviceAccountName: nfs-provisioner
       containers:
-        - name: nfs-provisioner
+        - name: nfs-ssd-provisioner
           image: "k8s.gcr.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2"
           imagePullPolicy: IfNotPresent
           volumeMounts:
-            - name: nfs-provisioner-root
+            - name: nfs-ssd-provisioner-root
               mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
-              value: cluster.local/nfs-provisioner
+              value: cluster.local/nfs-ssd-provisioner
             - name: NFS_SERVER
               value: 192.168.178.73
             - name: NFS_PATH
-              value: /k3s-storage
+              value: /ssd
+        - name: nfs-hdd-provisioner
+          image: "k8s.gcr.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2"
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: nfs-hdd-provisioner-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: cluster.local/nfs-hdd-provisioner
+            - name: NFS_SERVER
+              value: 192.168.178.73
+            - name: NFS_PATH
+              value: /hdd
       volumes:
-        - name: nfs-provisioner-root
+        - name: nfs-ssd-provisioner-root
           nfs:
             server: 192.168.178.73
-            path: /k3s-storage
+            path: /ssd
+        - name: nfs-hdd-provisioner-root
+          nfs:
+            server: 192.168.178.73
+            path: /hdd

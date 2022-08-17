@@ -1,12 +1,25 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: nfs
+  name: ssd
   labels:
     app: nfs-provisioner
-provisioner: cluster.local/nfs-provisioner
+provisioner: cluster.local/nfs-ssd-provisioner
 allowVolumeExpansion: true
 reclaimPolicy: Delete
+volumeBindingMode: Immediate
+parameters:
+  archiveOnDelete: "true"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: hdd
+  labels:
+    app: nfs-provisioner
+provisioner: cluster.local/nfs-hdd-provisioner
+allowVolumeExpansion: true
+reclaimPolicy: Retain
 volumeBindingMode: Immediate
 parameters:
   archiveOnDelete: "true"
