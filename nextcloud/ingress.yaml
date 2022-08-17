@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: owncloud-ingress
-  namespace: owncloud
+  name: nextcloud-ingress
+  namespace: nextcloud
   annotations:
     cert-manager.io/cluster-issuer: ca-issuer-stg
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
@@ -20,6 +20,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: owncloud
+                name: nextcloud
                 port:
-                  name: web
+                  name: http
