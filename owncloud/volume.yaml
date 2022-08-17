@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: owncloud-pvc
+  namespace: owncloud
+  labels:
+    app: owncloud
+    type: local
+spec:
+  storageClassName: hdd
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Ti
