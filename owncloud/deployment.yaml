@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: owncloud
+  namespace: owncloud
+  labels:
+    app: owncloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: owncloud
+  template:
+    metadata:
+      labels:
+        app: owncloud
+    spec:
+      containers:
+      - name: owncloud
+        image: owncloud/server:latest
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: "/mnt/data"
+          name: data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: owncloud-pvc
