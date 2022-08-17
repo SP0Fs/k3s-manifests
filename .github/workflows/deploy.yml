@@ -31,6 +31,9 @@ jobs:
 
       - name: Apply all changed files
         uses: nick-fields/retry@v2
+        env:
+          OWNCLOUD_ADMIN_PASS: ${{ secrets.OWNCLOUD_ADMIN_PASS }}
+          OWNCLOUD_DB_PASS: ${{ secrets.OWNCLOUD_DB_PASS }}
         with:
           timeout_seconds: 30
           max_attempts: 4

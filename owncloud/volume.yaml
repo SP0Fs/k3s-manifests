@@ -13,3 +13,19 @@ spec:
   resources:
     requests:
       storage: 5Gi #3Ti later
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: owncloud-db-pvc
+  namespace: owncloud
+  labels:
+    app: owncloud
+    type: local
+spec:
+  storageClassName: ssd
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
