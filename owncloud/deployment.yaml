@@ -25,17 +25,17 @@ spec:
             value: "false"
 
           - name: OWNCLOUD_URL
-          value: https://cloud.spof.tech
+            value: https://cloud.spof.tech
 
           - name: OWNCLOUD_ADMIN_USER
             value: admin
           - name: OWNCLOUD_ADMIN_PASSWORD
-            value: passwort   # marc ändert das
+            value: ${OWNCLOUD_ADMIN_PASS}   # marc ändert das
 
           - name: OWNCLOUD_UPLOAD_MAX_FILESIZE
-            value: 4G
+            value: 10G
           - name: OWNCLOUD_MAX_FILE_UPLOADS
-            value: "20"
+            value: "1000"
 
           - name: DB_TYPE
             value: pgsql
@@ -46,7 +46,7 @@ spec:
           - name: DB_USER
             value: owncloud
           - name: DB_PASS
-            value: password     # marc ändert das
+            value: ${OWNCLOUD_DB_PASS}     # marc ändert das
           - name: DB_NAME
             value: owncloud_db
 
@@ -58,12 +58,12 @@ spec:
 
 
       - name: postgresql
-        image: sameersbn/postgresql:9.6-4
+        image: postgresql:latest
         env:
           - name: DB_USER
             value: owncloud
           - name: DB_PASS
-            value: password
+            value: ${OWNCLOUD_DB_PASS} 
           - name: DB_NAME
             value: owncloud_db
         ports:

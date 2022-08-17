@@ -23,9 +23,9 @@ metadata:
     app: owncloud
     type: local
 spec:
-  storageClassName: ssd #hdd later
+  storageClassName: ssd
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi #3Ti later
+      storage: 1Gi
