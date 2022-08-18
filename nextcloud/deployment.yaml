@@ -59,6 +59,8 @@ spec:
           #   value: redis
           - name: MYSQL_HOST
             value: mariadb
+          - name: MYSQL_PORT
+            value: "3306"
           - name: MYSQL_DATABASE
             value: nextcloud
           - name: MYSQL_PASSWORD
