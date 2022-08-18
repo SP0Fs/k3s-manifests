@@ -42,17 +42,11 @@
 #             - name: MYSQL_DATABASE
 #               value: nextcloud
 #             - name: MYSQL_PASSWORD
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: nextcloud-secret
-#                   key: MYSQL_PASSWORD
+#               value: ${NEXTCLOUD_DB_PASSWORD}
 #             - name: MYSQL_USER
 #               value: nextcloud
 #             - name: MYSQL_ROOT_PASSWORD
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: nextcloud-secret
-#                   key: MYSQL_PASSWORD
+#               value: ${NEXTCLOUD_DB_PASSWORD}
 #         volumeMounts:
 #         - name: mariadb-data
 #           mountPath: /var/lib/mysql
@@ -94,17 +88,11 @@ spec:
             - name: MYSQL_DATABASE
               value: nextcloud
             - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: nextcloud-secret
-                  key: MYSQL_PASSWORD
+              value: ${NEXTCLOUD_DB_PASSWORD}
             - name: MYSQL_USER
               value: nextcloud
             - name: NEXTCLOUD_ADMIN_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: nextcloud-secret
-                  key: NEXTCLOUD_ADMIN_PASSWORD
+              value: ${NEXTCLOUD_ADMIN_PASSWORD}
             - name: NEXTCLOUD_ADMIN_USER
               value: "admin"
             - name: NEXTCLOUD_TRUSTED_DOMAINS 
