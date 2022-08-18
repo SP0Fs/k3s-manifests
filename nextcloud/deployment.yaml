@@ -1,58 +1,3 @@
-
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: mariadb 
-#   namespace: nextcloud
-#   labels:
-#     app: mariadb 
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: mariadb 
-#   template:
-#     metadata:
-#       labels:
-#         app: mariadb 
-#     spec:
-#       nodeSelector:
-#         kubernetes.io/arch: arm64
-#         node-role.kubernetes.io/master: "true"
-#       volumes:
-#       - name: mariadb-data
-#         persistentVolumeClaim:
-#           claimName: mariadb-pvc
-#       containers:
-#       - name: mariadb 
-#         image: lscr.io/linuxserver/mariadb:latest
-#         ports:
-#           - containerPort: 3306 
-#         # args:
-#         #   - --transaction-isolation=READ-COMMITTED
-#         #   - --binlog-format=ROW
-#         #   - --max-connections=1000
-#         env:
-#             - name: TZ
-#               value: Europe/Berlin
-#             - name: PUID
-#               value: "1000"
-#             - name: PGID
-#               value: "1000"
-#             - name: MYSQL_DATABASE
-#               value: nextcloud
-#             - name: MYSQL_PASSWORD
-#               value: ${NEXTCLOUD_DB_PASSWORD}
-#             - name: MYSQL_USER
-#               value: nextcloud
-#             - name: MYSQL_ROOT_PASSWORD
-#               value: ${NEXTCLOUD_DB_PASSWORD}
-#         volumeMounts:
-#         - name: mariadb-data
-#           mountPath: /var/lib/mysql
-
-# ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -70,43 +15,72 @@ spec:
       labels:
         app: nextcloud
     spec:
+      nodeSelector:
+        kubernetes.io/arch: arm64
+        node-role.kubernetes.io/master: "true"
       volumes:
+      - name: mariadb-data
+        persistentVolumeClaim:
+          claimName: mariadb-pvc
       - name: nextcloud-storage
         persistentVolumeClaim: 
           claimName: nextcloud-pvc
       containers:
-        - image: nextcloud
-          name: nextcloud 
-          ports:
-            - containerPort: 80
-              protocol: TCP
-          env:
-            # - name: REDIS_HOST
-            #   value: redis
-            - name: MYSQL_HOST
-              value: mariadb 
-            - name: MYSQL_DATABASE
-              value: nextcloud
-            - name: MYSQL_PASSWORD
-              value: ${NEXTCLOUD_DB_PASSWORD}
-            - name: MYSQL_USER
-              value: nextcloud
-            - name: NEXTCLOUD_ADMIN_PASSWORD
-              value: ${NEXTCLOUD_ADMIN_PASSWORD}
-            - name: NEXTCLOUD_ADMIN_USER
-              value: "admin"
-            - name: NEXTCLOUD_TRUSTED_DOMAINS 
-              value: cloud.spof.tech
-            - name: OVERWRITEHOST
-              value: cloud.spof.tech
-            - name: OVERWRITEPROTOCOL
-              value: https
-            - name: OVERWRITECLIURL
-              value: https://cloud.spof.tech
-            - name: TRUSTED_PROXIES
-              value: "192.168.178.0/24 10.42.0.0/24 10.42.1.0/24 10.42.2.0/24 10.43.0.0/16"
-            - name: NEXTCLOUD_URL
-              value: https://cloud.spof.tech
-          volumeMounts:
-            - mountPath: /var/www/html
-              name: nextcloud-storage
+      - name: mariadb 
+        image: lscr.io/linuxserver/mariadb:latest
+        ports:
+          - containerPort: 3306
+        env:
+          - name: TZ
+            value: Europe/Berlin
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+          - name: MYSQL_DATABASE
+            value: nextcloud
+          - name: MYSQL_PASSWORD
+            value: ${NEXTCLOUD_DB_PASSWORD}
+          - name: MYSQL_USER
+            value: nextcloud
+          - name: MYSQL_ROOT_PASSWORD
+            value: ${NEXTCLOUD_DB_PASSWORD}
+        volumeMounts:
+        - name: mariadb-data
+          mountPath: /var/lib/mysql
+
+      - image: nextcloud
+        name: nextcloud 
+        ports:
+          - containerPort: 80
+            protocol: TCP
+        env:
+          # - name: REDIS_HOST
+          #   value: redis
+          - name: MYSQL_HOST
+            value: mariadb
+          - name: MYSQL_DATABASE
+            value: nextcloud
+          - name: MYSQL_PASSWORD
+            value: ${NEXTCLOUD_DB_PASSWORD}
+          - name: MYSQL_USER
+            value: nextcloud
+          - name: NEXTCLOUD_ADMIN_PASSWORD
+            value: ${NEXTCLOUD_ADMIN_PASSWORD}
+          - name: NEXTCLOUD_ADMIN_USER
+            value: "admin"
+          - name: NEXTCLOUD_TRUSTED_DOMAINS 
+            value: cloud.spof.tech
+          - name: OVERWRITEHOST
+            value: cloud.spof.tech
+          - name: OVERWRITEPROTOCOL
+            value: https
+          - name: OVERWRITECLIURL
+            value: https://cloud.spof.tech
+          - name: TRUSTED_PROXIES
+            value: "192.168.178.0/24 10.42.0.0/24 10.42.1.0/24 10.42.2.0/24 10.43.0.0/16"
+          - name: NEXTCLOUD_URL
+            value: https://cloud.spof.tech
+        volumeMounts:
+          - mountPath: /var/www/html
+            name: nextcloud-storage
