@@ -38,6 +38,7 @@ jobs:
           timeout_seconds: 30
           max_attempts: 4
           command: |
+            echo ${NEXTCLOUD_ADMIN_PASSWORD}
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               if [[ "$file" == ".github/"* ]]; then
                 continue
