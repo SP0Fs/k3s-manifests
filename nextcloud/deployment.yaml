@@ -40,11 +40,17 @@ spec:
           - name: MYSQL_DATABASE
             value: nextcloud
           - name: MYSQL_PASSWORD
-            value: ${NEXTCLOUD_DB_PASSWORD}
+            valueFrom:
+              secretKeyRef:
+                name: nextcloud-secret
+                key: mariadb-password
           - name: MYSQL_USER
             value: nextcloud
           - name: MYSQL_ROOT_PASSWORD
-            value: ${NEXTCLOUD_DB_PASSWORD}
+            valueFrom:
+              secretKeyRef:
+                name: nextcloud-secret
+                key: mariadb-password
         volumeMounts:
         - name: mariadb-data
           mountPath: /var/lib/mysql
@@ -58,15 +64,21 @@ spec:
           # - name: REDIS_HOST
           #   value: redis
           - name: MYSQL_HOST
-            value: "mariadb:3306"
+            value: mariadb
           - name: MYSQL_DATABASE
             value: nextcloud
           - name: MYSQL_PASSWORD
-            value: ${NEXTCLOUD_DB_PASSWORD}
+            valueFrom:
+              secretKeyRef:
+                name: nextcloud-secret
+                key: mariadb-password
           - name: MYSQL_USER
             value: nextcloud
           - name: NEXTCLOUD_ADMIN_PASSWORD
-            value: ${NEXTCLOUD_ADMIN_PASSWORD}
+            valueFrom:
+              secretKeyRef:
+                name: nextcloud-secret
+                key: nextcloud-password
           - name: NEXTCLOUD_ADMIN_USER
             value: "admin"
           - name: NEXTCLOUD_TRUSTED_DOMAINS 
