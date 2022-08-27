@@ -6,6 +6,8 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: ca-issuer
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/proxy-body-size: "10G"
+    nginx.org/client-max-body-size: "10G"
     # nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
     # nginx.ingress.kubernetes.io/auth-tls-secret: "ingress-nginx/spof-cert"
     # nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"

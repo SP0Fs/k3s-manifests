@@ -51,6 +51,8 @@ spec:
               secretKeyRef:
                 name: nextcloud-secret
                 key: mariadb-root-password
+          - name: PHP_UPLOAD_LIMIT
+            value: "10G"
         volumeMounts:
         - name: mariadb-data
           mountPath: /var/lib/mysql
