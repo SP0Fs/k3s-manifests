@@ -35,6 +35,7 @@ jobs:
           NEXTCLOUD_ADMIN_PASSWORD: ${{ secrets.NEXTCLOUD_ADMIN_PASS }}
           NEXTCLOUD_DB_PASSWORD: ${{ secrets.NEXTCLOUD_DB_PASS }}
           NEXTCLOUD_DB_ROOT_PASSWORD: ${{ secrets.NEXTCLOUD_DB_ROOT_PASS }}
+          HOMEASSISTANT_DB_PASSWORD: ${{ secrets.HOMEASSISTANT_DB_PASSWORD }}
         with:
           timeout_seconds: 30
           max_attempts: 4
