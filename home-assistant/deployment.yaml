@@ -35,7 +35,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysql-recorder-pass
+                  name: ha-mysql-pass
                   key: password
           volumeMounts:
             - name: ha-mysql-storage
