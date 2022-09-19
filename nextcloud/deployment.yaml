@@ -27,7 +27,7 @@ spec:
           claimName: nextcloud-pvc
       containers:
       - name: mariadb 
-        image: lscr.io/linuxserver/mariadb:latest
+        image: mariadb:latest
         ports:
           - containerPort: 3306
         env:
