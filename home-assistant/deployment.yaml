@@ -15,7 +15,6 @@ spec:
       labels:
         app: homeassistant
     spec:
-      nodeName: princess-celestia
       volumes:
         - name: ha-storage
           persistentVolumeClaim:
