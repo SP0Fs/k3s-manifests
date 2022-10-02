@@ -18,7 +18,7 @@ spec:
   tls:
     - hosts:
       - cloud.spof.tech
-      secretName: owncloud-certs
+      secretName: nextcloud-certs
   rules:
     - host: "cloud.spof.tech"
       http:

@@ -27,7 +27,7 @@ spec:
           claimName: nextcloud-pvc
       containers:
       - name: mariadb 
-        image: lscr.io/linuxserver/mariadb:latest
+        image: mariadb:latest
         ports:
           - containerPort: 3306
         env:
@@ -63,8 +63,12 @@ spec:
           - containerPort: 80
             protocol: TCP
         env:
-          # - name: REDIS_HOST
-          #   value: redis
+          - name: TZ
+            value: Europe/Berlin
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
           - name: MYSQL_HOST
             value: "nextcloud-db:3306"
           - name: MYSQL_DATABASE
