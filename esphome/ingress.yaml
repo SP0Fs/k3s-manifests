@@ -16,7 +16,7 @@ spec:
   tls:
     - hosts:
       - esp.spof.tech
-      secretName: ha-certs
+      secretName: esp-certs
   rules:
     - host: esp.spof.tech
       http:
