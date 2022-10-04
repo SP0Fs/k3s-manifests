@@ -15,6 +15,8 @@ spec:
       labels:
         app: homeassistant
     spec:
+      nodeSelector:
+        kubernetes.io/arch: arm64
       volumes:
         - name: ha-storage
           persistentVolumeClaim:
