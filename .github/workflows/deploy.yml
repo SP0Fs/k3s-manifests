@@ -45,8 +45,7 @@ jobs:
               if [[ "$file" == ".github/"* ]]; then
                 continue
               fi
-              if [[ "$file" == *".yaml" ]]; then              
-                echo "applying $file"
+              if [[ "$file" == *".yaml" ]]; then
                 envsubst < $file | kubectl apply -f -
               fi
             done
