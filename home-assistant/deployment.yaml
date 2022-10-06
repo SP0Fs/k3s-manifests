@@ -30,6 +30,10 @@ spec:
           volumeMounts:
             - mountPath: "/config"
               name: ha-storage
+          ports:
+            - containerPort: 8123
+              name: http
+              protocol: TCP
         - image: mysql:latest
           name: mysql
           env:

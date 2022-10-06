@@ -4,7 +4,7 @@ metadata:
   name: homeassistant-ingress
   namespace: homeassistant
   annotations:
-    cert-manager.io/cluster-issuer: ca-issuer-stg
+    cert-manager.io/cluster-issuer: ca-issuer
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
     nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
     nginx.ingress.kubernetes.io/auth-tls-secret: "ingress-nginx/spof-cert"
