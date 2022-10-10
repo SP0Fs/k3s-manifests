@@ -9,3 +9,6 @@ spec:
   ports:
     - protocol: TCP
       port: 6052
+      targetPort: 6052
+      nodePort: 30552
+  type: NodePort
