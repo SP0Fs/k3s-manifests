@@ -5,10 +5,6 @@ metadata:
     k8s-app: kubernetes-dashboard
   name: kubernetes-dashboard
 rules:
-  # Allow Metrics Scraper to get metrics from the Metrics server
-  - apiGroups: ["metrics.k8s.io"]
-    resources: ["pods", "nodes"]
-    verbs: ["get", "list", "watch"]
   - apiGroups:
       - ""
       - apps
@@ -20,7 +16,7 @@ rules:
       - networking.k8s.io
       - storage.k8s.io
       - apiextensions.k8s.io
-
+      - metrics.k8s.io
     resources:
       - pods
       - componentstatuses
@@ -52,9 +48,9 @@ rules:
       - clusterroles
       - clusterrolebindings
       - networkpolicies
-      - secrets
       - customresourcedefinition
-    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+      - pods/log
+    verbs: ["get", "list", "watch", "describe"]
 
 ---
 
