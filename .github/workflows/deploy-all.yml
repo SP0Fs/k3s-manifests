@@ -21,9 +21,11 @@ jobs:
       - name: Get files
         id: get-files
         run: |
-          export array=($(find . -name '*.yaml')) 
-          echo "$(printf "\\\\\"%s\\\\\", " "${array[@]}")"
-          echo "::set-output name=files::[$(printf "\\\\\"%s\\\\\", " "${array[@]}")]"
+          array=($(find . -name '*.yaml')) 
+          liststring = $(printf "\\\\\"%s\\\\\", " "${array[@]}")
+          list = ${liststring::-1}
+          echo $list
+          echo "::set-output name=files::[$list]"
 
      
   apply:
