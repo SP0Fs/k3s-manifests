@@ -29,7 +29,7 @@ spec:
             - name: PROVISIONER_NAME
               value: cluster.local/nfs-ssd-provisioner
             - name: NFS_SERVER
-              value: 192.168.178.73
+              value: 192.168.179.2
             - name: NFS_PATH
               value: /ssd
         - name: nfs-hdd-provisioner
@@ -42,15 +42,15 @@ spec:
             - name: PROVISIONER_NAME
               value: cluster.local/nfs-hdd-provisioner
             - name: NFS_SERVER
-              value: 192.168.178.73
+              value: 192.168.179.2
             - name: NFS_PATH
               value: /hdd
       volumes:
         - name: nfs-ssd-provisioner-root
           nfs:
-            server: 192.168.178.73
+            server: 192.168.179.2
             path: /ssd
         - name: nfs-hdd-provisioner-root
           nfs:
-            server: 192.168.178.73
+            server: 192.168.179.2
             path: /hdd
