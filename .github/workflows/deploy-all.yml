@@ -18,29 +18,8 @@ jobs:
           mkdir ${HOME}/.kube
           echo ${{ secrets.KUBECONFIG }} | base64 --decode > ${HOME}/.kube/config
 
-      - name: Get files
-        id: get-files
-        run: |
-          array=($(find . -name '*.yaml')) 
-          liststring = $(printf "\\\\\"%s\\\\\", " "${array[@]}")
-          list = ${liststring::-1}
-          echo $list
-          echo "::set-output name=files::[$list]"
 
-     
-  apply:
-    needs: get-files
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        value: ${{ fromJson(needs.get-files.outputs.files) }}
-    steps:
-      - name: Apply namespaces
-        if: ${{ endsWith(matrix.value, 'namespace.yaml') }}
-        run: |
-          kubectl apply -f ${{ matrix.value }}
-
-      - name: Apply all files  
+      - name: Apply files
         uses: nick-fields/retry@v2
         env:
           NEXTCLOUD_ADMIN_PASSWORD: ${{ secrets.NEXTCLOUD_ADMIN_PASS }}
@@ -48,7 +27,14 @@ jobs:
           NEXTCLOUD_DB_ROOT_PASSWORD: ${{ secrets.NEXTCLOUD_DB_ROOT_PASS }}
           HOMEASSISTANT_DB_PASSWORD: ${{ secrets.HOMEASSISTANT_DB_PASSWORD }}
         with:
-          timeout_seconds: 30
+          timeout_seconds: 60
           max_attempts: 4
           command: |
-            envsubst < ${{ matrix.value }} | kubectl apply -f -
+            run: |
+              for f in */namespace.yaml; do
+                envsubst < $f | kubectl apply -f -
+              done
+
+              for f in */*.yaml; do
+                envsubst < $f | kubectl apply -f -
+              done
