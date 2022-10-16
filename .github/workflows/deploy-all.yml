@@ -30,11 +30,10 @@ jobs:
           timeout_seconds: 60
           max_attempts: 4
           command: |
-            run: |
-              for f in */namespace.yaml; do
-                envsubst < $f | kubectl apply -f -
-              done
+            for f in */namespace.yaml; do
+              envsubst < $f | kubectl apply -f -
+            done
 
-              for f in */*.yaml; do
-                envsubst < $f | kubectl apply -f -
-              done
+            for f in */*.yaml; do
+              envsubst < $f | kubectl apply -f -
+            done
