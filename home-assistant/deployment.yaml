@@ -24,6 +24,9 @@ spec:
         - name: ha-mysql-storage
           persistentVolumeClaim:
             claimName: ha-mysql-pvc
+        - name: ha-config
+          configMap:
+            name: homeassistant-config
       containers:
         - image: ghcr.io/home-assistant/home-assistant:stable
           name: home-assistant
@@ -45,3 +48,15 @@ spec:
           volumeMounts:
             - name: ha-mysql-storage
               mountPath: /var/lib/mysql
+      initContainers:
+        - name: init-homeassistant
+          image: busybox
+          command: ['cp', '/config/configuration.yaml', '/config-ha/configuration.yaml']
+          volumeMounts:
+            - name: ha-config
+              mountPath: /config
+            - name: ha-storage
+              mountPath: /config-ha
+
+
+            
