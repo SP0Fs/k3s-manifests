@@ -5,7 +5,7 @@ metadata:
   namespace: homeassistant
 spec:
   selector:
-    app.kubernetes.io/name: esphome
+    app: esphome
   ports:
     - protocol: TCP
       port: 6052
