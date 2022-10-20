@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-      app: postgres
+        app: postgres
     spec:
       volumes:
       - name: postgres-pv-storage
