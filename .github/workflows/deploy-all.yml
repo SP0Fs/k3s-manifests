@@ -26,6 +26,7 @@ jobs:
           NEXTCLOUD_DB_PASSWORD: ${{ secrets.NEXTCLOUD_DB_PASS }}
           NEXTCLOUD_DB_ROOT_PASSWORD: ${{ secrets.NEXTCLOUD_DB_ROOT_PASS }}
           HOMEASSISTANT_DB_PASSWORD: ${{ secrets.HOMEASSISTANT_DB_PASSWORD }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         with:
           timeout_seconds: 60
           max_attempts: 4
