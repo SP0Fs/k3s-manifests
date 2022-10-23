@@ -40,18 +40,3 @@ spec:
     requests:
       storage: 250Mi
   storageClassName: ssd
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mosquitto-certs
-  namespace: mosquitto
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Mi
-  storageClassName: ssd

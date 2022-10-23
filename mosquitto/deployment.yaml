@@ -42,12 +42,12 @@ spec:
         - name: mosquitto-config
           configMap:
             name: mosquitto-config
+        - name: mosquitto-certs
+          secret: 
+            secretName: mosquitto-certs
         - name: mosquitto-data
           persistentVolumeClaim:
             claimName: mosquitto-data
         - name: mosquitto-log
           persistentVolumeClaim:
             claimName: mosquitto-log
-        - name: mosquitto-certs
-          persistentVolumeClaim:
-            claimName: mosquitto-certs
