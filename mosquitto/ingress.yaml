@@ -16,7 +16,7 @@ spec:
   tls:
     - hosts:
       - mqtt.spof.tech
-      secretName: mqtt-certs
+      secretName: mosquitto-certs
   rules:
     - host: mqtt.spof.tech
       http:
