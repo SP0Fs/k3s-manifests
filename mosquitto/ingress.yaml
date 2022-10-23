@@ -27,4 +27,4 @@ spec:
               service:
                 name: mosquitto
                 port:
-                  number: 8883
+                  number: 8884

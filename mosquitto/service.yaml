@@ -26,3 +26,6 @@ spec:
     - protocol: TCP
       port: 8883
       targetPort: 8883
+    - protocol: TCP
+      port: 8884
+      targetPort: 8884

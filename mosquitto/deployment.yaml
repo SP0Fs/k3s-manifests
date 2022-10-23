@@ -27,6 +27,7 @@ spec:
         ports:
         - containerPort: 1883   # regular
         - containerPort: 8883   # for TLS
+        - containerPort: 8884   # TLS + CC
         volumeMounts:
             - name: mosquitto-config
               mountPath: /etc/mosquitto

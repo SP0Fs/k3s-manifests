@@ -17,10 +17,16 @@ data:
     listener 8883
     protocol mqtt
     require_certificate false
-    # require_certificate true
-    # cafile /mosquitto/certs/ca.crt
-    # keyfile /mosquitto/certs/tls.key
-    # certfile /mosquitto/certs/tls.crt
+    keyfile /mosquitto/certs/tls.key
+    certfile /mosquitto/certs/tls.crt
+
+    # MQTT + TLS + CC
+    listener 8884
+    protocol mqtt
+    require_certificate true
+    cafile /mosquitto/certs/ca.crt
+    keyfile /mosquitto/certs/tls.key
+    certfile /mosquitto/certs/tls.crt
 
     # Persistent data storage
     persistence true
