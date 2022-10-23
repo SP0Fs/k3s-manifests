@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mosquitto
+  name: mosquitto
+  namespace: mosquitto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      containers:
+      - name: mosquitto
+        image: eclipse-mosquitto:latest
+        resources:
+          requests:
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 1883   # regular
+        - containerPort: 8883   # for TLS
+        volumeMounts:
+            - name: mosquitto-config
+              mountPath: /etc/mosquitto
+              subPath: mosquitto.conf
+            - name: mosquitto-data
+              mountPath: /mosquitto/data
+            - name: mosquitto-log
+              mountPath: /mosquitto/log
+            - name: mosquitto-certs
+              mountPath: /mosquitto/certs
+      volumes:
+        - name: mosquitto-config
+          configMap:
+            name: mosquitto-config
+        - name: mosquitto-data
+          persistentVolumeClaim:
+            claimName: mosquitto-data
+        - name: mosquitto-log
+          persistentVolumeClaim:
+            claimName: mosquitto-log
+        - name: mosquitto-certs
+          persistentVolumeClaim:
+            claimName: mosquitto-certs
