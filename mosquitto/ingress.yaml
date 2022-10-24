@@ -1,36 +1,3 @@
-#apiVersion: networking.k8s.io/v1
-#kind: Ingress
-#metadata:
-#  name: mosquitto-ingress
-#  namespace: mosquitto
-#  annotations:
-#    cert-manager.io/cluster-issuer: ca-issuer
-#    nginx.ingress.kubernetes.io/backend-protocol: HTTP
-#    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
-#    nginx.ingress.kubernetes.io/auth-tls-secret: "ingress-nginx/spof-cert"
-#    nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
-#    nginx.ingress.kubernetes.io/auth-tls-error-page: "https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Fmobile%2F000%2F002%2F144%2FYou_Shall_Not_Pass!_0-1_screenshot.jpg"
-#    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
-#spec:
-#  ingressClassName: nginx
-#  tls:
-#    - hosts:
-#      - mqtt.spof.tech
-#      secretName: mosquitto-certs
-#  rules:
-#    - host: mqtt.spof.tech
-#      http:
-#        paths:
-#          - pathType: Prefix
-#            path: /
-#            backend:
-#              service:
-#                name: mosquitto
-#                port:
-#                  number: 8883
-
----
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -60,4 +27,4 @@ spec:
               service:
                 name: mosquitto
                 port:
-                  number: 8884
+                  number: 8883

@@ -8,31 +8,20 @@ metadata:
 data:
   mosquitto.conf: |
 
-    per_listener_settings true
-
-    # Plain MQTT
-    listener 1883
-
-    # MQTT with TLS (MQTTS)
+    # MQTT + TLS + CC
     listener 8883
     protocol mqtt
-    require_certificate false
-    keyfile /mosquitto/certs/tls.key
-    certfile /mosquitto/certs/tls.crt
-
-    # MQTT + TLS + CC
-    listener 8884
-    protocol mqtt
+    allow_anonymous false
     require_certificate true
-    cafile /mosquitto/certs/ca.crt
-    keyfile /mosquitto/certs/tls.key
-    certfile /mosquitto/certs/tls.crt
+    cafile /etc/mosquitto/certs/ca.crt
+    keyfile /etc/mosquitto/certs/tls.key
+    certfile /etc/mosquitto/certs/tls.crt
 
     # Persistent data storage
     persistence true
-    persistence_location /mosquitto/data/
+    persistence_location /etc/mosquitto/data/
 
     # Log system config
     log_type all
-    log_dest file /mosquitto/log/mosquitto.log
+    log_dest file /etc/mosquitto/log/mosquitto.log
     connection_messages true

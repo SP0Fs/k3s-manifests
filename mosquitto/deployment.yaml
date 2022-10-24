@@ -25,18 +25,17 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 8883   # for TLS
-        - containerPort: 8884   # TLS + CC
+        - containerPort: 8883   # for TLS + CC
         volumeMounts:
             - name: mosquitto-config
               mountPath: /etc/mosquitto
               subPath: mosquitto.conf
             - name: mosquitto-data
-              mountPath: /mosquitto/data
+              mountPath: /etc/mosquitto/data
             - name: mosquitto-log
-              mountPath: /mosquitto/log
+              mountPath: /etc/mosquitto/log
             - name: mosquitto-certs
-              mountPath: /mosquitto/certs
+              mountPath: /etc/mosquitto/certs
       volumes:
         - name: mosquitto-config
           configMap:
