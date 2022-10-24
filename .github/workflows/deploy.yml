@@ -41,6 +41,15 @@ jobs:
           timeout_seconds: 30
           max_attempts: 4
           command: |
+            for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+              if [[ "$file" == ".github/"* ]]; then
+                continue
+              fi
+              if [[ "$file" == "namespace.yaml" ]]; then
+                kubectl apply -f $file
+              fi
+            done
+            
             
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               if [[ "$file" == ".github/"* ]]; then
