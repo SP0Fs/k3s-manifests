@@ -1,0 +1,27 @@
+# https://mosquitto.org/man/mosquitto-conf-5.html
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mosquitto-config
+  namespace: mosquitto
+data:
+  mosquitto.conf: |
+
+    # MQTT + TLS + CC
+    listener 8883
+    protocol mqtt
+    allow_anonymous false
+    require_certificate true
+    cafile /etc/mosquitto/certs/ca.crt
+    keyfile /etc/mosquitto/certs/tls.key
+    certfile /etc/mosquitto/certs/tls.crt
+
+    # Persistent data storage
+    persistence true
+    persistence_location /etc/mosquitto/data/
+
+    # Log system config
+    log_type all
+    log_dest file /etc/mosquitto/log/mosquitto.log
+    connection_messages true
