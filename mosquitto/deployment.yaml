@@ -28,14 +28,14 @@ spec:
         - containerPort: 8883   # for TLS + CC
         volumeMounts:
             - name: mosquitto-config
-              mountPath: /etc/mosquitto
+              mountPath: /mosquitto/config/mosquitto.conf
               subPath: mosquitto.conf
             - name: mosquitto-data
-              mountPath: /etc/mosquitto/data
+              mountPath: /mosquitto/data
             - name: mosquitto-log
-              mountPath: /etc/mosquitto/log
+              mountPath: /mosquitto/log
             - name: mosquitto-certs
-              mountPath: /etc/mosquitto/certs
+              mountPath: /mosquitto/certs
       volumes:
         - name: mosquitto-config
           configMap:

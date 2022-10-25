@@ -13,15 +13,15 @@ data:
     protocol mqtt
     allow_anonymous false
     require_certificate true
-    cafile /etc/mosquitto/certs/ca.crt
-    keyfile /etc/mosquitto/certs/tls.key
-    certfile /etc/mosquitto/certs/tls.crt
+    cafile /mosquitto/certs/ca.crt
+    keyfile /mosquitto/certs/tls.key
+    certfile /mosquitto/certs/tls.crt
 
     # Persistent data storage
     persistence true
-    persistence_location /etc/mosquitto/data/
+    persistence_location /mosquitto/data/
 
     # Log system config
     log_type all
-    log_dest file /etc/mosquitto/log/mosquitto.log
+    log_dest file /mosquitto/log/mosquitto.log
     connection_messages true
