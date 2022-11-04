@@ -19,46 +19,12 @@ spec:
         kubernetes.io/arch: arm64
         node-role.kubernetes.io/master: "true"
       volumes:
-      # - name: mariadb-data
-      #   persistentVolumeClaim:
-      #     claimName: mariadb-pvc
       - name: nextcloud-storage
         persistentVolumeClaim: 
           claimName: nextcloud-pvc
       containers:
-      # - name: mariadb 
-      #   image: mariadb:latest
-      #   ports:
-      #     - containerPort: 3306
-      #   env:
-      #     - name: TZ
-      #       value: Europe/Berlin
-      #     - name: PUID
-      #       value: "1000"
-      #     - name: PGID
-      #       value: "1000"
-      #     - name: MYSQL_DATABASE
-      #       value: nextcloud
-      #     - name: MYSQL_PASSWORD
-      #       valueFrom:
-      #         secretKeyRef:
-      #           name: nextcloud-secret
-      #           key: mariadb-password
-      #     - name: MYSQL_USER
-      #       value: nextcloud
-      #     - name: MYSQL_ROOT_PASSWORD
-      #       valueFrom:
-      #         secretKeyRef:
-      #           name: nextcloud-secret
-      #           key: mariadb-root-password
-      #     - name: PHP_UPLOAD_LIMIT
-      #       value: "10G"
-      #   volumeMounts:
-      #   - name: mariadb-data
-      #     mountPath: /var/lib/mysql
-
-      - image: nextcloud
-        name: nextcloud:production
+      - image: nextcloud:production
+        name: nextcloud
         ports:
           - containerPort: 80
             protocol: TCP
