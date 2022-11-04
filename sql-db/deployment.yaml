@@ -17,20 +17,23 @@ spec:
       - name: postgres-pv-storage
         persistentVolumeClaim:
           claimName: postgres-pvc
+      - name: init-script
+        configMap:
+          name: postgres-init
+
       containers:
         - name: postgres
-          image: postgres:latest
+          image: postgres:14
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5432
-          env:
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret-config
-                  key: password
-            - name: PGDATA
-              value: /var/lib/postgresql/data/pgdata
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+            - secretRef:
+                name: postgres-secret
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgres-pv-storage
+            - mountPath: /docker-entrypoint-initdb.d
+              name: init-script
