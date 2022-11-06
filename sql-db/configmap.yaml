@@ -16,8 +16,6 @@ metadata:
   namespace: postgres
 data:
   init.sql: |
-    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO postgres;
-
     CREATE DATABASE nextcloud;
     CREATE USER nextcloud WITH PASSWORD '${NEXTCLOUD_DB_PASSWORD_PLAIN}';
     GRANT ALL PRIVILEGES ON DATABASE nextcloud TO nextcloud;
