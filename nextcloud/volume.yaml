@@ -10,16 +10,3 @@ spec:
     requests:
       storage: 2.65T
   storageClassName: hdd
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mariadb-pvc
-  namespace: nextcloud
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 256m
-  storageClassName: ssd

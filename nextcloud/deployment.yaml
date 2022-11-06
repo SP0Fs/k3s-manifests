@@ -36,7 +36,7 @@ spec:
           - name: PGID
             value: "1000"
           - name: POSTGRES_HOST
-            value: "postgres-nodeport.postgres:5432"
+            value: "postgres-service.postgres:5432"
           - name: POSTGRES_DB
             value: nextcloud
           - name: POSTGRES_PASSWORD
