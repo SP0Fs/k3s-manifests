@@ -35,16 +35,16 @@ spec:
             value: "1000"
           - name: PGID
             value: "1000"
-          - name: MYSQL_HOST
-            value: "nextcloud-db:3306"
-          - name: MYSQL_DATABASE
+          - name: POSTGRES_HOST
+            value: "postgres-nodeport.postgres:5432"
+          - name: POSTGRES_DB
             value: nextcloud
-          - name: MYSQL_PASSWORD
+          - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: nextcloud-secret
                 key: db-password
-          - name: MYSQL_USER
+          - name: POSTGRES_USER
             value: nextcloud
           - name: NEXTCLOUD_ADMIN_PASSWORD
             valueFrom:
