@@ -19,3 +19,7 @@ data:
     CREATE DATABASE nextcloud;
     CREATE USER nextcloud WITH PASSWORD '${NEXTCLOUD_DB_PASSWORD_PLAIN}';
     GRANT ALL PRIVILEGES ON DATABASE nextcloud TO nextcloud;
+
+    CREATE DATABASE homeassistant;
+    CREATE USER homeassistant WITH PASSWORD '${HOMEASSISTANT_DB_PASSWORD}';
+    GRANT ALL PRIVILEGES ON DATABASE homeassistant TO homeassistant;
