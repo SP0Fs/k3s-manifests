@@ -21,9 +21,6 @@ spec:
         - name: ha-storage
           persistentVolumeClaim:
             claimName: ha-pvc
-        # - name: ha-mysql-storage
-        #   persistentVolumeClaim:
-        #     claimName: ha-mysql-pvc
         - name: ha-config
           configMap:
             name: homeassistant-config
@@ -37,17 +34,6 @@ spec:
             - containerPort: 8123
               name: http
               protocol: TCP
-        # - image: mysql:latest
-        #   name: mysql
-        #   env:
-        #     - name: MYSQL_ROOT_PASSWORD
-        #       valueFrom:
-        #         secretKeyRef:
-        #           name: ha-mysql-pass
-        #           key: password
-        #   volumeMounts:
-        #     - name: ha-mysql-storage
-        #       mountPath: /var/lib/mysql
       initContainers:
         - name: init-homeassistant
           image: busybox
