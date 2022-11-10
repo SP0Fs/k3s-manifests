@@ -6,7 +6,7 @@ metadata:
     app: nfs-provisioner
 provisioner: cluster.local/nfs-ssd-provisioner
 allowVolumeExpansion: true
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 volumeBindingMode: Immediate
 parameters:
   archiveOnDelete: "true"
