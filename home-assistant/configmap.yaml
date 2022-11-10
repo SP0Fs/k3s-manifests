@@ -12,10 +12,18 @@ data:
     tts:
       - platform: google_translate
 
+    # Proxy config for Ingress
     http:
       use_x_forwarded_for: true
       trusted_proxies: 
         - 10.42.0.0/16
+
+    # recorder config for postgres db
+    recorder:
+      db_url: postgresql://homeassistant:${HOMEASSISTANT_DB_PASSWORD}@postgres-service.postgres:5432/homeassistant
+      purge_keep_days: 1
+      auto_purge: true
+
 
     automation: !include automations.yaml
     script: !include scripts.yaml
