@@ -25,6 +25,6 @@ data:
       auto_purge: true
 
 
-    automation: !include automations.yaml
-    script: !include scripts.yaml
-    scene: !include scenes.yaml
+    # automation: !include automations.yaml
+    # script: !include scripts.yaml
+    # scene: !include scenes.yaml
