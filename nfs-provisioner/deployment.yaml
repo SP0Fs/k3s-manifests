@@ -17,6 +17,8 @@ spec:
       labels:
         app: nfs-provisioner
     spec:
+      nodeSelector:
+          kubernetes.io/arch: arm64
       serviceAccountName: nfs-provisioner
       containers:
         - name: nfs-ssd-provisioner
