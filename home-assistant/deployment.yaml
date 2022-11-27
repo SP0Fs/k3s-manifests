@@ -37,7 +37,7 @@ spec:
       initContainers:
         - name: init-homeassistant
           image: busybox
-          command: ['cp', '/config/configuration.yaml', '/config-ha/configuration.yaml']
+          command: ['cp', '/config/*.yaml', '/config-ha/']
           volumeMounts:
             - name: ha-config
               mountPath: /config
