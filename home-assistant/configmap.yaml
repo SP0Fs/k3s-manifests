@@ -23,6 +23,25 @@ data:
     scene: !include scenes.yaml
   
   automations.yaml: |
+    - id: '1'
+      alias: Close Blinds
+      description: ''
+      trigger:
+      - platform: time
+        at: '17:30:00'
+      condition: []
+      action:
+      - device_id: 4a1c6975f2400043d1ceec078839fec8
+        domain: cover
+        entity_id: cover.links
+        type: set_position
+        position: 0
+      - device_id: 05a193663865ff9f6b3db33f85fda860
+        domain: cover
+        entity_id: cover.rechts
+        type: set_position
+        position: 0
+      mode: single
 
   scripts.yaml: |
 
