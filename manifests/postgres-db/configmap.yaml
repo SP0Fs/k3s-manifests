@@ -17,7 +17,7 @@ metadata:
 data:
   init.sql: |
     CREATE DATABASE nextcloud;
-    CREATE USER nextcloud WITH PASSWORD '${NEXTCLOUD_DB_PASSWORD_PLAIN}';
+    CREATE USER nextcloud WITH PASSWORD '${NEXTCLOUD_DB_PASSWORD}';
     GRANT ALL PRIVILEGES ON DATABASE nextcloud TO nextcloud;
 
     CREATE DATABASE homeassistant;
