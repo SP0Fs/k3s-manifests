@@ -28,7 +28,7 @@ data:
       description: ''
       trigger:
       - platform: time
-        at: '17:30:00'
+        at: '18:00:00'
       condition: []
       action:
       - device_id: 4a1c6975f2400043d1ceec078839fec8
