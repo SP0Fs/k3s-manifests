@@ -1,2 +1,2 @@
 .terraform*
-/main.tf
+config/*
