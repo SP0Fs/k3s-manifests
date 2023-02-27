@@ -18,7 +18,7 @@ spec:
         app: nfs-provisioner
     spec:
       nodeSelector:
-          kubernetes.io/arch: arm64
+          kubernetes.io/arch: amd64
       serviceAccountName: nfs-provisioner
       containers:
         - name: nfs-ssd-provisioner
@@ -34,25 +34,8 @@ spec:
               value: 192.168.179.2
             - name: NFS_PATH
               value: /ssd
-        - name: nfs-hdd-provisioner
-          image: "k8s.gcr.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2"
-          imagePullPolicy: IfNotPresent
-          volumeMounts:
-            - name: nfs-hdd-provisioner-root
-              mountPath: /persistentvolumes
-          env:
-            - name: PROVISIONER_NAME
-              value: cluster.local/nfs-hdd-provisioner
-            - name: NFS_SERVER
-              value: 192.168.179.2
-            - name: NFS_PATH
-              value: /hdd
       volumes:
         - name: nfs-ssd-provisioner-root
           nfs:
             server: 192.168.179.2
             path: /ssd
-        - name: nfs-hdd-provisioner-root
-          nfs:
-            server: 192.168.179.2
-            path: /hdd

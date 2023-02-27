@@ -16,7 +16,7 @@ spec:
         app: nextcloud
     spec:
       nodeSelector:
-        kubernetes.io/arch: arm64
+        kubernetes.io/arch: amd64
         node-role.kubernetes.io/master: "true"
       volumes:
       - name: nextcloud-storage

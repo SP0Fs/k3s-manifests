@@ -14,8 +14,7 @@ spec:
         app: postgres
     spec:
       nodeSelector:
-        kubernetes.io/arch: arm64
-        kubernetes.io/hostname: rpi3b-marc
+        kubernetes.io/arch: amd64
       volumes:
       - name: postgres-pv-storage
         persistentVolumeClaim:

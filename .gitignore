@@ -1,2 +1,3 @@
 .terraform*
-config/*
+config/.decrypted
+terraform.tfstate*
