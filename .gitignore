@@ -1,2 +1,3 @@
 .terraform*
 config/*
+terraform.tfstate*
