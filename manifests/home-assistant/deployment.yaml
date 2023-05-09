@@ -17,6 +17,7 @@ spec:
     spec:
       nodeSelector:
         kubernetes.io/arch: amd64
+        kubernetes.io/hostname: hp-elitedesk
       volumes:
         - name: ha-storage
           persistentVolumeClaim:
