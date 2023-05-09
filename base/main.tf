@@ -12,12 +12,12 @@ terraform {
 
 provider "kubernetes" {
     config_path     = "~/.kube/config"
-    config_context  = "default"
+    config_context  = "spof"
 }
 
 provider "kubectl" {
     config_path     = "~/.kube/config"
-    config_context  = "default"
+    config_context  = "spof"
 }
 
 # cert-manager
@@ -74,19 +74,19 @@ resource "kubectl_manifest" "postgres-db" {
 }
 
 # container registry
-data "kubectl_path_documents" "container-registry_manifests" {
-    pattern = "manifests/container-registry/*.yaml"
-}
+# data "kubectl_path_documents" "container-registry_manifests" {
+#     pattern = "manifests/container-registry/*.yaml"
+# }
 
-resource "kubectl_manifest" "container-registry" {
-    depends_on = [
-        kubectl_manifest.nfs-provisioner,
-        kubectl_manifest.nginx-ingress
-    ]
+# resource "kubectl_manifest" "container-registry" {
+#     depends_on = [
+#         kubectl_manifest.nfs-provisioner,
+#         kubectl_manifest.nginx-ingress
+#     ]
 
-    count = length(data.kubectl_path_documents.container-registry_manifests.documents)
-    yaml_body = element(data.kubectl_path_documents.container-registry_manifests.documents, count.index)
-}
+#     count = length(data.kubectl_path_documents.container-registry_manifests.documents)
+#     yaml_body = element(data.kubectl_path_documents.container-registry_manifests.documents, count.index)
+# }
 
 # home-assistant
 data "kubectl_path_documents" "home-assistant_manifests" {
@@ -166,36 +166,36 @@ resource "kubectl_manifest" "kubernetes-dashboard" {
 }
 
 # Mosquitto
-data "kubectl_path_documents" "mosquitto_manifests" {
-    pattern = "manifests/mosquitto/*.yaml"
-}
+# data "kubectl_path_documents" "mosquitto_manifests" {
+#     pattern = "manifests/mosquitto/*.yaml"
+# }
 
-resource "kubectl_manifest" "mosquitto" {
-    depends_on = [
-        kubectl_manifest.nfs-provisioner,
-        kubectl_manifest.nginx-ingress
-    ]
+# resource "kubectl_manifest" "mosquitto" {
+#     depends_on = [
+#         kubectl_manifest.nfs-provisioner,
+#         kubectl_manifest.nginx-ingress
+#     ]
 
-    count = length(data.kubectl_path_documents.mosquitto_manifests.documents)
-    yaml_body = element(data.kubectl_path_documents.mosquitto_manifests.documents, count.index)
-}
+#     count = length(data.kubectl_path_documents.mosquitto_manifests.documents)
+#     yaml_body = element(data.kubectl_path_documents.mosquitto_manifests.documents, count.index)
+# }
 
 # Nextcloud
-data "kubectl_path_documents" "nextcloud_manifests" {
-    pattern = "manifests/nextcloud/*.yaml"
-    vars = {
-        NEXTCLOUD_DB_PASSWORD       = base64encode(var.nextcloud_settings.db_password)
-        NEXTCLOUD_ADMIN_PASSWORD    = base64encode(var.nextcloud_settings.admin_password)
-    }
-}
+# data "kubectl_path_documents" "nextcloud_manifests" {
+#     pattern = "manifests/nextcloud/*.yaml"
+#     vars = {
+#         NEXTCLOUD_DB_PASSWORD       = base64encode(var.nextcloud_settings.db_password)
+#         NEXTCLOUD_ADMIN_PASSWORD    = base64encode(var.nextcloud_settings.admin_password)
+#     }
+# }
 
-resource "kubectl_manifest" "nextcloud" {
-    depends_on = [
-        kubectl_manifest.nfs-provisioner,
-        kubectl_manifest.nginx-ingress,
-        kubectl_manifest.postgres-db
-    ]
+# resource "kubectl_manifest" "nextcloud" {
+#     depends_on = [
+#         kubectl_manifest.nfs-provisioner,
+#         kubectl_manifest.nginx-ingress,
+#         kubectl_manifest.postgres-db
+#     ]
 
-    count = length(data.kubectl_path_documents.nextcloud_manifests.documents)
-    yaml_body = element(data.kubectl_path_documents.nextcloud_manifests.documents, count.index)
-}
+#     count = length(data.kubectl_path_documents.nextcloud_manifests.documents)
+#     yaml_body = element(data.kubectl_path_documents.nextcloud_manifests.documents, count.index)
+# }
