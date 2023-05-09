@@ -18,7 +18,7 @@ spec:
         app: nfs-provisioner
     spec:
       nodeSelector:
-          kubernetes.io/arch: arm64
+          kubernetes.io/arch: amd64
       serviceAccountName: nfs-provisioner
       containers:
         - name: nfs-ssd-provisioner
@@ -39,7 +39,3 @@ spec:
           nfs:
             server: 192.168.179.2
             path: /ssd
-        - name: nfs-hdd-provisioner-root
-          nfs:
-            server: 192.168.179.2
-            path: /hdd
