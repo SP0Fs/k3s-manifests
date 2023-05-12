@@ -74,19 +74,19 @@ resource "kubectl_manifest" "postgres-db" {
 }
 
 # container registry
-# data "kubectl_path_documents" "container-registry_manifests" {
-#     pattern = "manifests/container-registry/*.yaml"
-# }
+data "kubectl_path_documents" "container-registry_manifests" {
+    pattern = "manifests/container-registry/*.yaml"
+}
 
-# resource "kubectl_manifest" "container-registry" {
-#     depends_on = [
-#         kubectl_manifest.nfs-provisioner,
-#         kubectl_manifest.nginx-ingress
-#     ]
+resource "kubectl_manifest" "container-registry" {
+    depends_on = [
+        kubectl_manifest.nfs-provisioner,
+        kubectl_manifest.nginx-ingress
+    ]
 
-#     count = length(data.kubectl_path_documents.container-registry_manifests.documents)
-#     yaml_body = element(data.kubectl_path_documents.container-registry_manifests.documents, count.index)
-# }
+    count = length(data.kubectl_path_documents.container-registry_manifests.documents)
+    yaml_body = element(data.kubectl_path_documents.container-registry_manifests.documents, count.index)
+}
 
 # home-assistant
 data "kubectl_path_documents" "home-assistant_manifests" {
