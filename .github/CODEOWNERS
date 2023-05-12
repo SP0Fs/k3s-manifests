@@ -1,0 +1,4 @@
+* @marcleibold
+manifests/esphome/ @chr1s-code
+manifests/home-assistant/ @chr1s-code
+manifests/mosquitto/ @chr1s-code
