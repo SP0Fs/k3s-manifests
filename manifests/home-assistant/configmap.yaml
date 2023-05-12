@@ -18,6 +18,9 @@ data:
       trusted_proxies: 
         - 10.42.0.0/16
 
+    # Activate my integration to enable HACS
+    my:
+
     automation: !include automations.yaml
     script: !include scripts.yaml
     scene: !include scenes.yaml
@@ -28,7 +31,7 @@ data:
       description: ''
       trigger:
       - platform: time
-        at: '18:00:00'
+        at: '22:00:00'
       condition: []
       action:
       - device_id: 4a1c6975f2400043d1ceec078839fec8
