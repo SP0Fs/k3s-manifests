@@ -12,3 +12,4 @@ data:
     cert-file: "/etc/letsencrypt/live/ntfy.example.com.crt"
     cache-file: "/var/cache/ntfy/cache.db"
     attachment-cache-dir: "/var/cache/ntfy/attachments"
+    behind-proxy: true
