@@ -44,6 +44,16 @@ resource "kubectl_manifest" "nginx-ingress" {
     yaml_body = element(data.kubectl_path_documents.nginx-ingress_manifests.documents, count.index)
 }
 
+# User for GitHub Actions
+data "kubectl_path_documents" "github-actions-user_manifests" {
+    pattern = "manifests/gh-actions-user/*.yaml"
+}
+
+resource "kubectl_manifest" "github-actions-user" {
+    count = length(data.kubectl_path_documents.github-actions-user_manifests.documents)
+    yaml_body = element(data.kubectl_path_documents.github-actions-user_manifests.documents, count.index)
+}
+
 # NFS Provisioner
 data "kubectl_path_documents" "nfs-provisioner_manifests" {
     pattern = "manifests/nfs-provisioner/*.yaml"

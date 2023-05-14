@@ -51,7 +51,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -input=false
+        run: terraform plan -input=false -no-color
         continue-on-error: true
 
       - name: Terraform Apply
@@ -61,12 +61,19 @@ jobs:
       - name: Update Pull Request
         uses: marocchino/sticky-pull-request-comment@v2
         if: github.event_name == 'pull_request'
+        continue-on-error: true
         with:
           message: |
             #### Terraform Format and Style 🖌`${{ steps.fmt.outcome }}`
             #### Terraform Initialization ⚙️`${{ steps.init.outcome }}`
             #### Terraform Plan 📖`${{ steps.plan.outcome }}`
             #### Terraform Validation 🤖`${{ steps.validate.outcome }}`
+
+            <details><summary>Show Plan</summary>
+            ```
+            ${{ steps.plan.outputs.stdout }}
+            ```
+            </details>
 
             *Pushed by: @${{ github.actor }}, Action: `${{ github.event_name }}`*
 
