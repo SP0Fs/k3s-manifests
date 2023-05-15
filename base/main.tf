@@ -184,7 +184,7 @@ resource "kubectl_manifest" "kubernetes-dashboard" {
 
 # NTFY Server
 data "kubectl_path_documents" "ntfy-server_manifests" {
-    pattern = "manifests/ntfy-server/*.yaml"
+    pattern = "manifests/ntfy/*.yaml"
 }
 
 resource "kubectl_manifest" "ntfy-server" {
