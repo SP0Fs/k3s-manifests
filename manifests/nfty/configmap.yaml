@@ -5,11 +5,11 @@ metadata:
 data:
   server.yml: |
     # Template: https://github.com/binwiederhier/ntfy/blob/main/server/server.yml
-    base-url: "http://ntfy.spof.tech"
+    base-url: "https://ntfy.spof.tech"
     listen-http: ":80"
-    listen-https: ":443"
-    key-file: "/etc/letsencrypt/live/ntfy.example.com.key"
-    cert-file: "/etc/letsencrypt/live/ntfy.example.com.crt"
+    # listen-https: ":443"
+    # key-file: "/etc/letsencrypt/live/ntfy.example.com.key"
+    # cert-file: "/etc/letsencrypt/live/ntfy.example.com.crt"
     cache-file: "/var/cache/ntfy/cache.db"
     attachment-cache-dir: "/var/cache/ntfy/attachments"
     behind-proxy: true

@@ -18,19 +18,24 @@ spec:
       containers:
       - name: ntfy
         image: binwiederhier/ntfy:latest
-        #args: ["serve"]
+        args: ["serve"]
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 443
+        - containerPort: 80
           name: http
         volumeMounts:
         - name: config
           mountPath: "/etc/ntfy"
           readOnly: true
+        - name: cache
+          mountPath: "/var/cache/ntfy"
       volumes:
         - name: config
           configMap:
             name: ntfy
+        - name: cache
+          persistentVolumeClaim:
+            claimName: ntfy-cache
