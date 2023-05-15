@@ -20,6 +20,13 @@ provider "kubectl" {
     config_context  = "spof"
 }
 
+provider "helm" {
+    kubernetes {
+        config_path     = "~/.kube/config"
+        config_context  = "spof"
+    }
+}
+
 # cert-manager
 data "kubectl_path_documents" "cert-manager_manifests" {
     pattern = "manifests/cert-manager/*.yaml"
@@ -42,6 +49,16 @@ resource "kubectl_manifest" "nginx-ingress" {
 
     count = length(data.kubectl_path_documents.nginx-ingress_manifests.documents)
     yaml_body = element(data.kubectl_path_documents.nginx-ingress_manifests.documents, count.index)
+}
+
+# User for GitHub Actions
+data "kubectl_path_documents" "github-actions-user_manifests" {
+    pattern = "manifests/gh-actions-user/*.yaml"
+}
+
+resource "kubectl_manifest" "github-actions-user" {
+    count = length(data.kubectl_path_documents.github-actions-user_manifests.documents)
+    yaml_body = element(data.kubectl_path_documents.github-actions-user_manifests.documents, count.index)
 }
 
 # NFS Provisioner
