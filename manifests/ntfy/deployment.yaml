@@ -26,12 +26,17 @@ spec:
         ports:
         - containerPort: 80
           name: http
+        - containerPort: 443
+          name: https
         volumeMounts:
         - name: config
-          mountPath: "/etc/ntfy"
+          mountPath: "/etc/ntfy/server.yml"
+          subPath: "server.yml"
           readOnly: true
         - name: cache
           mountPath: "/var/cache/ntfy"
+        - name: certs
+          mountPath: "/etc/letsencrypt/live/"
       volumes:
         - name: config
           configMap:
@@ -39,3 +44,6 @@ spec:
         - name: cache
           persistentVolumeClaim:
             claimName: ntfy-cache
+        - name: certs
+          secret:
+            secretName: ntfy-certs
