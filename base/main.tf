@@ -20,6 +20,13 @@ provider "kubectl" {
     config_context  = "spof"
 }
 
+provider "helm" {
+    kubernetes {
+        config_path     = "~/.kube/config"
+        config_context  = "spof"
+    }
+}
+
 # cert-manager
 data "kubectl_path_documents" "cert-manager_manifests" {
     pattern = "manifests/cert-manager/*.yaml"
