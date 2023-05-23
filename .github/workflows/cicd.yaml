@@ -69,9 +69,9 @@ jobs:
             #### Terraform Plan 📖`${{ steps.plan.outcome }}`
             #### Terraform Validation 🤖`${{ steps.validate.outcome }}`
 
-            <details><summary>Show Plan</summary>
+            <details><summary>Show Plan</summary><code>
             ${{ steps.plan.outputs.stdout }}
-            </details>
+            </code></details>
 
             *Pushed by: @${{ github.actor }}, Action: `${{ github.event_name }}`*
 
