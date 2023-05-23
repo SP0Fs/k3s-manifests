@@ -183,19 +183,19 @@ resource "kubectl_manifest" "kubernetes-dashboard" {
 }
 
 # NTFY Server
-# data "kubectl_path_documents" "ntfy-server_manifests" {
-#     pattern = "manifests/ntfy/*.yaml"
-# }
+data "kubectl_path_documents" "ntfy-server_manifests" {
+    pattern = "manifests/ntfy/*.yaml"
+}
 
-# resource "kubectl_manifest" "ntfy-server" {
-#     depends_on = [
-#         kubectl_manifest.nfs-provisioner,
-#         kubectl_manifest.nginx-ingress
-#     ]
+resource "kubectl_manifest" "ntfy-server" {
+    depends_on = [
+        kubectl_manifest.nfs-provisioner,
+        kubectl_manifest.nginx-ingress
+    ]
 
-#     count = length(data.kubectl_path_documents.ntfy-server_manifests.documents)
-#     yaml_body = element(data.kubectl_path_documents.ntfy-server_manifests.documents, count.index)
-# }
+    count = length(data.kubectl_path_documents.ntfy-server_manifests.documents)
+    yaml_body = element(data.kubectl_path_documents.ntfy-server_manifests.documents, count.index)
+}
 
 # Mosquitto
 # data "kubectl_path_documents" "mosquitto_manifests" {
