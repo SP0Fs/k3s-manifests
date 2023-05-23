@@ -10,3 +10,18 @@ spec:
     requests:
       storage: 500Mi
   storageClassName: ssd
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ntfy-user-db
+  namespace: ntfy
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+  storageClassName: ssd

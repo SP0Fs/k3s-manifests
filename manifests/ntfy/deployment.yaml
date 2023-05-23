@@ -35,6 +35,8 @@ spec:
           readOnly: true
         - name: cache
           mountPath: "/var/cache/ntfy"
+        - name: user-db
+          mountPath: "/var/lib/ntfy"
         - name: certs
           mountPath: "/etc/letsencrypt/live/"
       volumes:
@@ -44,6 +46,9 @@ spec:
         - name: cache
           persistentVolumeClaim:
             claimName: ntfy-cache
+        - name: user-db
+          persistentVolumeClaim:
+            claimName: ntfy-user-db
         - name: certs
           secret:
             secretName: ntfy-certs
