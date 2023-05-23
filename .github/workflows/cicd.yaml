@@ -70,9 +70,7 @@ jobs:
             #### Terraform Validation 🤖`${{ steps.validate.outcome }}`
 
             <details><summary>Show Plan</summary>
-            ```
             ${{ steps.plan.outputs.stdout }}
-            ```
             </details>
 
             *Pushed by: @${{ github.actor }}, Action: `${{ github.event_name }}`*
