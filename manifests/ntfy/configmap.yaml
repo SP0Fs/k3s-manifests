@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ntfy-config
+  namespace: ntfy
+data:
+  server.yml: |
+    base-url: "https://ntfy.spof.tech"
+    listen-http: ":80"
+    listen-https: ":443"
+    key-file: "/etc/letsencrypt/live/tls.key"
+    cert-file: "/etc/letsencrypt/live/tls.crt"
+    cache-file: "/var/cache/ntfy/cache.db"
+    cache-duration: "24h"
+    attachment-cache-dir: "/var/cache/ntfy/attachments"
+    attachment-file-size-limit: "1M"
+    attachment-expiry-duration: "24h"
+    auth-file: "/var/lib/ntfy/user.db"
+    auth-default-access: "read-only"
+    web-root: "/"
+    global-topic-limit: 150
+    visitor-subscription-limit: 30
+    visitor-request-limit-burst: 60
+    visitor-request-limit-replenish: "1m"
+    behind-proxy: true
+    upstream-base-url: "https://ntfy.sh"

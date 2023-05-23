@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ntfy-ingress
+  namespace: ntfy
+  annotations:
+    cert-manager.io/cluster-issuer: ca-issuer
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - ntfy.spof.tech
+      secretName: ntfy-certs
+  rules:
+    - host: ntfy.spof.tech
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: ntfy-tls
+                port:
+                  name: https
