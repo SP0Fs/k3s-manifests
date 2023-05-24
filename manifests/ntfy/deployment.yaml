@@ -52,3 +52,8 @@ spec:
         - name: certs
           secret:
             secretName: ntfy-certs
+      initContainers:
+        - name: init-ntfy
+          image: busybox
+          command: ['/bin/sh', '-c']
+          args: ['']
