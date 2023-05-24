@@ -17,7 +17,7 @@ data:
     attachment-expiry-duration: "24h"
     auth-file: "/var/lib/ntfy/user.db"
     auth-default-access: "deny-all"
-    web-root: "/"
+    web-root: "disable"
     global-topic-limit: 150
     visitor-subscription-limit: 30
     visitor-request-limit-burst: 60
