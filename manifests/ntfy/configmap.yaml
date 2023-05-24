@@ -16,7 +16,7 @@ data:
     attachment-file-size-limit: "1M"
     attachment-expiry-duration: "24h"
     auth-file: "/var/lib/ntfy/user.db"
-    auth-default-access: "read-only"
+    auth-default-access: "deny-all"
     web-root: "/"
     global-topic-limit: 150
     visitor-subscription-limit: 30
