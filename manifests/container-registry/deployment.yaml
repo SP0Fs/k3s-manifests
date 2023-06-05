@@ -17,7 +17,7 @@ spec:
       - name: registry
         image: registry:latest
         ports:
-        - containerPort: 5000
+        - containerPort: 443
         env:
         - name: REGISTRY_AUTH
           value: "htpasswd"
@@ -27,6 +27,8 @@ spec:
           value: /certs/tls.crt
         - name: REGISTRY_HTTP_TLS_KEY
           value: /certs/tls.key
+        - name: REGISTRY_HTTP_ADDR
+          value: "0.0.0.0:443"
         volumeMounts:
         - mountPath: "/var/lib/registry"
           name: registry-pv
