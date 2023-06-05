@@ -23,6 +23,8 @@ spec:
           value: "htpasswd"
         - name: REGISTRY_AUTH_HTPASSWD_PATH
           value: /auth/htpasswd
+        - name: REGISTRY_AUTH_HTPASSWD_REALM
+          value: Registry Realm
         - name: REGISTRY_HTTP_TLS_CERTIFICATE
           value: /certs/tls.crt
         - name: REGISTRY_HTTP_TLS_KEY
