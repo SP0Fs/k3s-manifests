@@ -13,41 +13,19 @@ spec:
       labels:
         app: registry
     spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        kubernetes.io/hostname: hp-elitedesk
       containers:
       - name: registry
         image: registry:latest
         ports:
-        - containerPort: 443
-        env:
-        - name: REGISTRY_AUTH
-          value: "htpasswd"
-        - name: REGISTRY_AUTH_HTPASSWD_PATH
-          value: /auth/htpasswd
-        - name: REGISTRY_AUTH_HTPASSWD_REALM
-          value: Registry Realm
-        - name: REGISTRY_HTTP_TLS_CERTIFICATE
-          value: /certs/tls.crt
-        - name: REGISTRY_HTTP_TLS_KEY
-          value: /certs/tls.key
-        - name: REGISTRY_HTTP_ADDR
-          value: "0.0.0.0:443"
+        - containerPort: 5000
         volumeMounts:
         - mountPath: "/var/lib/registry"
           name: registry-pv
           subPath: "registry"
-        - mountPath: "/certs"
-          name: certs
-        - mountPath: "/auth"
-          name: htpasswd
-          readOnly: true
-          subPath: "htpasswd"
       volumes:
       - name: registry-pv
         persistentVolumeClaim:
           claimName: registry-pvc
-      - name: certs
-        secret:
-          secretName: registry-certs
-      - name: htpasswd
-        configMap:
-          name: htpasswd
