@@ -1,0 +1,10 @@
+# a configmap holding a htpasswd file for basic auth
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: htpasswd
+  namespace: registry
+data:
+  htpasswd: |
+    ${REGISTRY_USERNAME}:${REGISTRY_HTPASSWD}

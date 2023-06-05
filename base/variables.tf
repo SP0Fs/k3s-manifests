@@ -15,3 +15,10 @@ variable "postgres_settings" {
         admin_password = string
     })
 }
+
+variable "registry_settings" {
+    type = object({
+        username = string
+        htpasswd = string
+    })
+}

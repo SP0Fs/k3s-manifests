@@ -93,6 +93,11 @@ resource "kubectl_manifest" "postgres-db" {
 # container registry
 data "kubectl_path_documents" "container-registry_manifests" {
     pattern = "manifests/container-registry/*.yaml"
+
+    vars = {
+        REGISTRY_USERNAME = var.registry_settings.username
+        REGISTRY_HTPASSWD = var.registry_settings.htpasswd
+    }
 }
 
 resource "kubectl_manifest" "container-registry" {

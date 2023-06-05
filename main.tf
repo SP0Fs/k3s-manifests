@@ -17,4 +17,9 @@ module "base" {
   postgres_settings = {
     admin_password = local.envs["POSTGRES_ADMIN_PASSWORD"]
   }
+
+  registry_settings = {
+    username = local.envs["REGISTRY_USERNAME"]
+    htpasswd = local.envs["REGISTRY_HTPASSWD"]
+  }
 }
