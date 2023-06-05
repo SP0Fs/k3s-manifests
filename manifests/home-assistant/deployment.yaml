@@ -45,6 +45,3 @@ spec:
               mountPath: /config
             - name: ha-storage
               mountPath: /config-ha
-
-
-            
