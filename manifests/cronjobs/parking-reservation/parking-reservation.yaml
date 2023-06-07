@@ -11,6 +11,6 @@ spec:
         spec:
           containers:
           - name: parking-reservation
-            image: #TODO
+            image: 192.168.179.1:30500/parking-reservation:latest
             pullPolicy: IfNotPresent
           restartPolicy: OnFailure
