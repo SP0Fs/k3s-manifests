@@ -1,0 +1,60 @@
+global:
+  imagePullPolicy: IfNotPresent
+
+ui:
+  deleteImages: true
+  runAsRoot: false
+  defaultTheme: dark
+  image: joxit/docker-registry-ui:2.4.1
+  proxy: true
+
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 1024
+
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: ca-issuer
+      nginx.ingress.kubernetes.io/backend-protocol: HTTP
+      nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+      nginx.ingress.kubernetes.io/auth-tls-secret: "ingress-nginx/spof-cert"
+      nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
+      nginx.ingress.kubernetes.io/auth-tls-error-page: "https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Fmobile%2F000%2F002%2F144%2FYou_Shall_Not_Pass!_0-1_screenshot.jpg"
+      nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
+    host: registry.spof.tech
+    tls:
+      - hosts:
+        - registry.spof.tech
+        secretName: registry-certs
+
+registry:
+  enabled: true
+  image: registry:2.8.1
+  dataVolume:
+    persistentVolumeClaim:
+      claimName: registry-pvc
+  service:
+    type: ClusterIP
+    port: 5000
+    targetPort: 5000
+  extraEnv:
+    - name: REGISTRY_AUTH
+      value: "htpasswd"
+    - name: REGISTRY_AUTH_HTPASSWD_REALM
+      value: "Registry Realm"
+    - name: REGISTRY_AUTH_HTPASSWD_PATH
+      value: "/var/lib/registry/htpasswd"
+
+  ingress:
+    enabled: true
+    host: docker.spof.tech
+    tls:
+      - hosts:
+        - docker.spof.tech
+        secretName: docker-certs
+    annotations:
+      cert-manager.io/cluster-issuer: ca-issuer
+      nginx.ingress.kubernetes.io/backend-protocol: HTTP
+      nginx.ingress.kubernetes.io/proxy-body-size: 2G
