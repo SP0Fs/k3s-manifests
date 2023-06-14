@@ -26,7 +26,7 @@ spec:
           configMap:
             name: homeassistant-config
       containers:
-        - image: ghcr.io/home-assistant/home-assistant:2022.12
+        - image: ghcr.io/home-assistant/home-assistant:2023.6
           name: home-assistant
           volumeMounts:
             - mountPath: "/config"
