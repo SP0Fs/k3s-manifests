@@ -11,6 +11,6 @@ spec:
         spec:
           containers:
           - name: parking-reservation
-            image: registry.spof.tech/parking-reservation:latest
+            image: docker.spof.tech/spof/parking-reservation:latest
             pullPolicy: IfNotPresent
           restartPolicy: OnFailure
