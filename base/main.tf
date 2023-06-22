@@ -214,6 +214,16 @@ resource "kubectl_manifest" "ntfy-server" {
   yaml_body = element(data.kubectl_path_documents.ntfy-server_manifests.documents, count.index)
 }
 
+# parking-reservation-cronjob
+data "kubectl_path_documents" "parking-reservation-cronjob_manifests" {
+  pattern = "manifests/cronjobs/parking-reservation/*.yaml"
+}
+
+resource "kubectl_manifest" "parking-reservation-cronjob" {
+  count     = length(data.kubectl_path_documents.parking-reservation-cronjob_manifests.documents)
+  yaml_body = element(data.kubectl_path_documents.parking-reservation-cronjob_manifests.documents, count.index)
+}
+
 # Mosquitto
 # data "kubectl_path_documents" "mosquitto_manifests" {
 #     pattern = "manifests/mosquitto/*.yaml"
