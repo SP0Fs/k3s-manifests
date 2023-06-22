@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: registry-copy-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: registry-copy-job
+        image: busybox
+        command: ["/bin/sh", "-c", "cp /registry-htpasswd/htpasswd /registry-data/htpasswd"]
+        volumeMounts:
+        - name: registry-data
+          mountPath: /registry-data
+        - name: registry-htpasswd
+          mountPath: /registry-htpasswd
+      restartPolicy: Never
+      volumes:
+      - name: registry-data
+        persistentVolumeClaim:
+          claimName: registry-pvc
+      - name: registry-htpasswd
+        configMap:
+          name: registry-htpasswd
