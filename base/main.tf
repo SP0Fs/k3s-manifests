@@ -116,7 +116,7 @@ resource "helm_release" "container-registry" {
   version    = "1.0.1"
   timeout    = 6000
   wait       = true
-
+  
   values = [
     file("manifests/container-registry/values.yaml")
   ]
@@ -212,21 +212,6 @@ resource "kubectl_manifest" "ntfy-server" {
 
   count     = length(data.kubectl_path_documents.ntfy-server_manifests.documents)
   yaml_body = element(data.kubectl_path_documents.ntfy-server_manifests.documents, count.index)
-}
-
-# NTFY Server
-data "kubectl_path_documents" "ntfy-server_manifests" {
-    pattern = "manifests/ntfy/*.yaml"
-}
-
-resource "kubectl_manifest" "ntfy-server" {
-    depends_on = [
-        kubectl_manifest.nfs-provisioner,
-        kubectl_manifest.nginx-ingress
-    ]
-
-    count = length(data.kubectl_path_documents.ntfy-server_manifests.documents)
-    yaml_body = element(data.kubectl_path_documents.ntfy-server_manifests.documents, count.index)
 }
 
 # Mosquitto
