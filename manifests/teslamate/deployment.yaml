@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: teslamate
+  name: teslamate
+  namespace: teslamate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teslamate
+  template:
+    metadata:
+      labels:
+        app: teslamate
+    spec:
+      containers:
+      - name: teslamate
+        image: teslamate/teslamate:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+        volumeMounts:
+        - name: config
+          mountPath: "/etc/ntfy/server.yml"
+          subPath: "server.yml"
+          readOnly: true
+        - name: cache
+          mountPath: "/var/cache/ntfy"
+        - name: user-db
+          mountPath: "/var/lib/ntfy"
+        - name: certs
+          mountPath: "/etc/letsencrypt/live/"
+      volumes:
+        - name: config
+          configMap:
+            name: ntfy-config
+        - name: cache
+          persistentVolumeClaim:
+            claimName: ntfy-cache
+        - name: user-db
+          persistentVolumeClaim:
+            claimName: ntfy-user-db
+        - name: certs
+          secret:
+            secretName: ntfy-certs
