@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: parking-reservation
+  namespace: cronjobs
+spec:
+  schedule: "15 00 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: parking-reservation
+            image: docker.spof.tech/spof/parking-reservation:latest
+            pullPolicy: IfNotPresent
+          restartPolicy: OnFailure

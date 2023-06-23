@@ -116,7 +116,7 @@ resource "helm_release" "container-registry" {
   version    = "1.0.1"
   timeout    = 6000
   wait       = true
-
+  
   values = [
     file("manifests/container-registry/values.yaml")
   ]
@@ -212,6 +212,16 @@ resource "kubectl_manifest" "ntfy-server" {
 
   count     = length(data.kubectl_path_documents.ntfy-server_manifests.documents)
   yaml_body = element(data.kubectl_path_documents.ntfy-server_manifests.documents, count.index)
+}
+
+# parking-reservation-cronjob
+data "kubectl_path_documents" "parking-reservation-cronjob_manifests" {
+  pattern = "manifests/cronjobs/parking-reservation/*.yaml"
+}
+
+resource "kubectl_manifest" "parking-reservation-cronjob" {
+  count     = length(data.kubectl_path_documents.parking-reservation-cronjob_manifests.documents)
+  yaml_body = element(data.kubectl_path_documents.parking-reservation-cronjob_manifests.documents, count.index)
 }
 
 # Mosquitto
