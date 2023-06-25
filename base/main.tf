@@ -235,6 +235,17 @@ resource "kubectl_manifest" "parking-reservation-cronjob" {
   depends_on = [kubectl_manifest.cronjobs]
 }
 
+# pv23-ticketalert-cronjob
+data "kubectl_path_documents" "pv23-ticketalert-cronjob_manifests" {
+  pattern = "manifests/cronjobs/pv23_ticketalert/*.yaml"
+}
+
+resource "kubectl_manifest" "pv23-ticketalert-cronjob" {
+  count     = length(data.kubectl_path_documents.pv23-ticketalert-cronjob_manifests.documents)
+  yaml_body = element(data.kubectl_path_documents.pv23-ticketalert-cronjob_manifests.documents, count.index)
+  depends_on = [kubectl_manifest.cronjobs]
+}
+
 # Mosquitto
 # data "kubectl_path_documents" "mosquitto_manifests" {
 #     pattern = "manifests/mosquitto/*.yaml"
