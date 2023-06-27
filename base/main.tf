@@ -246,8 +246,8 @@ resource "kubectl_manifest" "sealed-secrets-resources-cronjob" {
   
 }
 
-resource "helm_release" "sealed-secrets" {
-  name       = "sealed-secrets"
+resource "helm_release" "sealed-secrets-controller" {
+  name       = "sealed-secrets-controller"
   chart      = "sealed-secrets"
   repository = "https://bitnami-labs.github.io/sealed-secrets"
   version    = "2.10.0"
@@ -255,7 +255,20 @@ resource "helm_release" "sealed-secrets" {
   wait       = true
   
   values = [
-    file("manifests/sealed-secrets/values.yaml")
+    file("manifests/sealed-secrets/controller-values.yaml")
+  ]
+}
+
+resource "helm_release" "sealed-secrets-web" {
+  name       = "sealed-secrets-web"
+  chart      = "sealed-secrets-web"
+  repository = "https://charts.bakito.net"
+  version    = "3.1.1"
+  timeout    = 6000
+  wait       = true
+  
+  values = [
+    file("manifests/sealed-secrets/ui-values.yaml")
   ]
 }
 
