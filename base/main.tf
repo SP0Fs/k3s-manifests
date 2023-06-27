@@ -235,6 +235,20 @@ resource "kubectl_manifest" "parking-reservation-cronjob" {
   depends_on = [kubectl_manifest.cronjobs]
 }
 
+# sealed secrets
+resource "helm_release" "sealed-secrets" {
+  name       = "sealed-secrets"
+  chart      = "sealed-secrets"
+  repository = "https://bitnami-labs.github.io"
+  version    = "2.10.0"
+  timeout    = 6000
+  wait       = true
+  
+  values = [
+    file("manifests/sealed-secrets/values.yaml")
+  ]
+}
+
 # Mosquitto
 # data "kubectl_path_documents" "mosquitto_manifests" {
 #     pattern = "manifests/mosquitto/*.yaml"
