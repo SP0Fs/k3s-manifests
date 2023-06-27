@@ -239,7 +239,7 @@ resource "kubectl_manifest" "parking-reservation-cronjob" {
 resource "helm_release" "sealed-secrets" {
   name       = "sealed-secrets"
   chart      = "sealed-secrets"
-  repository = "https://bitnami-labs.github.io"
+  repository = "https://bitnami-labs.github.io/sealed-secrets"
   version    = "2.10.0"
   timeout    = 6000
   wait       = true
