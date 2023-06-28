@@ -244,6 +244,29 @@ resource "kubectl_manifest" "pv23-ticketalert-cronjob" {
   count     = length(data.kubectl_path_documents.pv23-ticketalert-cronjob_manifests.documents)
   yaml_body = element(data.kubectl_path_documents.pv23-ticketalert-cronjob_manifests.documents, count.index)
   depends_on = [kubectl_manifest.cronjobs]
+
+# sealed secrets
+data "kubectl_path_documents" "sealed-secrets-resources_manifests" {
+  pattern = "manifests/sealed-secrets/resources/*.yaml"
+}
+
+resource "kubectl_manifest" "sealed-secrets-resources-cronjob" {
+  count     = length(data.kubectl_path_documents.sealed-secrets-resources_manifests.documents)
+  yaml_body = element(data.kubectl_path_documents.sealed-secrets-resources_manifests.documents, count.index)
+  
+}
+
+resource "helm_release" "sealed-secrets" {
+  name       = "sealed-secrets"
+  chart      = "sealed-secrets"
+  repository = "https://bitnami-labs.github.io/sealed-secrets"
+  version    = "2.10.0"
+  timeout    = 6000
+  wait       = true
+  
+  values = [
+    file("manifests/sealed-secrets/values.yaml")
+  ]
 }
 
 # Mosquitto

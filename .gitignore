@@ -1,3 +1,4 @@
 .terraform*
 config/.decrypted
 terraform.tfstate.backup
+terraform.tfstate
