@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: resale-saturday
+  namespace: cronjobs
+spec:
+  # Every 5 minutes
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: resale-saturday
+            image: docker.spof.tech/spof/pv23_resale_saturday:latest
+            pullPolicy: IfNotPresent
+          restartPolicy: OnFailure
