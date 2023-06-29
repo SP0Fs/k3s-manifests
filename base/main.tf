@@ -259,18 +259,19 @@ resource "helm_release" "sealed-secrets-controller" {
   ]
 }
 
-resource "helm_release" "sealed-secrets-web" {
-  name       = "sealed-secrets-web"
-  chart      = "sealed-secrets-web"
-  repository = "https://charts.bakito.net"
-  version    = "3.1.1"
-  timeout    = 6000
-  wait       = true
+# resource "helm_release" "sealed-secrets-web" {
+#   name       = "sealed-secrets-web"
+#   namespace  = "sealed-secrets"
+#   chart      = "sealed-secrets-web"
+#   repository = "https://charts.bakito.net"
+#   version    = "3.1.1"
+#   timeout    = 6000
+#   wait       = true
   
-  values = [
-    file("manifests/sealed-secrets/ui-values.yaml")
-  ]
-}
+#   values = [
+#     file("manifests/sealed-secrets/ui-values.yaml")
+#   ]
+# }
 
 # Mosquitto
 # data "kubectl_path_documents" "mosquitto_manifests" {
