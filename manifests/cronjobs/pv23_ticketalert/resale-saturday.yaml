@@ -8,6 +8,7 @@ spec:
   schedule: "*/5 * * * *"
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 2
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       template:
