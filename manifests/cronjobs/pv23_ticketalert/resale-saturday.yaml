@@ -6,6 +6,8 @@ metadata:
 spec:
   # Every 5 minutes
   schedule: "*/5 * * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 2
   jobTemplate:
     spec:
       template:
@@ -14,4 +16,8 @@ spec:
           - name: resale-saturday
             image: docker.spof.tech/spof/pv23_resale_saturday:latest
             pullPolicy: IfNotPresent
-          restartPolicy: OnFailure
+          restartPolicy: Never
+          backoffLimit: 0
+          concurrencyPolicy: Forbid
+          imagePullSecrets:
+          - name: regcred
