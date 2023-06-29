@@ -17,7 +17,7 @@ spec:
             image: docker.spof.tech/spof/pv23_resale_saturday:latest
             pullPolicy: IfNotPresent
           restartPolicy: Never
-          backoffLimit: 0
           concurrencyPolicy: Forbid
           imagePullSecrets:
           - name: regcred
+      backoffLimit: 0
