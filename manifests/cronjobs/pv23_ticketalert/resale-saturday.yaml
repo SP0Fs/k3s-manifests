@@ -19,5 +19,5 @@ spec:
           restartPolicy: Never
           concurrencyPolicy: Forbid
           imagePullSecrets:
-          - name: regcred
+          - name: recred
       backoffLimit: 0
