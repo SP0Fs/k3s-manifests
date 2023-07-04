@@ -20,5 +20,5 @@ spec:
           restartPolicy: Never
           concurrencyPolicy: Forbid
           imagePullSecrets:
-          - name: recred
+          - name: docker-registry-cred
       backoffLimit: 0
