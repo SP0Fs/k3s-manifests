@@ -15,10 +15,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-      - home.spof.tech
+      - home.leibold.tech
       secretName: ha-certs
   rules:
-    - host: home.spof.tech
+    - host: home.leibold.tech
       http:
         paths:
           - pathType: Prefix

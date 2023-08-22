@@ -16,10 +16,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-      - k3s.spof.tech
+      - k3s.leibold.tech
       secretName: kubeapi-certs
   rules:
-  - host: "k3s.spof.tech"
+  - host: "k3s.leibold.tech"
     http:
       paths:
       - pathType: Prefix

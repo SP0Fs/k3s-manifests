@@ -17,10 +17,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-      - cloud.spof.tech
+      - cloud.leibold.tech
       secretName: nextcloud-certs
   rules:
-    - host: "cloud.spof.tech"
+    - host: "cloud.leibold.tech"
       http:
         paths:
           - path: /

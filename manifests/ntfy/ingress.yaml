@@ -11,10 +11,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-      - ntfy.spof.tech
+      - ntfy.leibold.tech
       secretName: ntfy-certs
   rules:
-    - host: ntfy.spof.tech
+    - host: ntfy.leibold.tech
       http:
         paths:
           - pathType: Prefix

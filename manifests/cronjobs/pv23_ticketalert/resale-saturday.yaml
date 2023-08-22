@@ -15,7 +15,7 @@ spec:
         spec:
           containers:
           - name: resale-saturday
-            image: docker.spof.tech/spof/pv23_resale_saturday:latest
+            image: docker.leibold.tech/spof/pv23_resale_saturday:latest
             pullPolicy: IfNotPresent
           restartPolicy: Never
           concurrencyPolicy: Forbid

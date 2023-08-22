@@ -15,10 +15,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-      - kubernetes-dashboard.spof.tech
+      - kubernetes-dashboard.leibold.tech
       secretName: kubernetes-dashboard-certs
   rules:
-    - host: "kubernetes-dashboard.spof.tech"
+    - host: "kubernetes-dashboard.leibold.tech"
       http:
         paths:
           - path: /

@@ -5,7 +5,7 @@ metadata:
   namespace: ntfy
 data:
   server.yml: |
-    base-url: "https://ntfy.spof.tech"
+    base-url: "https://ntfy.leibold.tech"
     listen-http: ":80"
     listen-https: ":443"
     key-file: "/etc/letsencrypt/live/tls.key"

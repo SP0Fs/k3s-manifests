@@ -15,10 +15,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-      - grafana.spof.tech
+      - grafana.leibold.tech
       secretName: grafana-certs
   rules:
-    - host: "grafana.spof.tech"
+    - host: "grafana.leibold.tech"
       http:
         paths:
           - path: /

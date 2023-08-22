@@ -14,7 +14,7 @@ spec:
         spec:
           containers:
           - name: parking-reservation
-            image: docker.spof.tech/spof/parking-reservation:latest
+            image: docker.leibold.tech/spof/parking-reservation:latest
             pullPolicy: IfNotPresent
           restartPolicy: Never
           concurrencyPolicy: Forbid
